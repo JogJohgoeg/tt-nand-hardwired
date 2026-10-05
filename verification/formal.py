@@ -126,6 +126,25 @@ def cec_result(returncode, output):
     return ('equivalent' if equivalent else 'different') if equivalent != different else 'error'
 
 
+def sat_verify_result(returncode, output):
+    """Recognize only an explicit -verify verdict, never a generic tool failure.
+
+    Some Yosys builds exit with the fatal proof diagnostic before the captured
+    stream contains the preceding 'model found: FAIL!' banner (8e139cf runner).
+    """
+    fatal = 'ERROR: Called with -verify and proof did fail!'
+    errors = re.findall(r'(?m)^ERROR:.*$', output)
+    if re.search(r'(?i)TIMEOUT!|proof did time out|solver timed out|solver interrupted', output):
+        return 'error'
+    passed = 'no model found: SUCCESS!' in output
+    failed = 'model found: FAIL!' in output or fatal in errors
+    if returncode == 0 and passed and not failed and not errors:
+        return 'proved'
+    if returncode == 1 and failed and not passed and all(e == fatal for e in errors):
+        return 'counterexample'
+    return 'error'
+
+
 def cec(abc, gold, gate, log):
     start = time.monotonic()
     command = [abc, '-c', f'cec -T 120 {gold.relative_to(ROOT)} {gate.relative_to(ROOT)}']
@@ -147,6 +166,7 @@ def check_definedness_controls():
         "assign good = a; assign bad = s ? a : branch; endmodule\n"
         "module leaking(input s, a, output good, bad);\n"
         "assign good = a; assign bad = s ? 1'bx : a; endmodule\n")
+    results = {}
     for top in ('masked', 'leaking'):
         ys = BUILD/f'undef_{top}.ys'
         ys.write_text(f'read_verilog build/formal/undef_controls.v\nhierarchy -top {top}\n'
@@ -155,11 +175,12 @@ def check_definedness_controls():
                                 capture_output=True, text=True, timeout=75)
         output = result.stdout + result.stderr
         (BUILD/f'undef_{top}.log').write_text(output)
-        if top == 'masked':
-            assert result.returncode == 0 and 'no model found: SUCCESS!' in output
-        else:
-            assert result.returncode != 0 and 'model found: FAIL!' in output, output
-    return {'masked_X': 'proved defined', 'observable_X': 'rejected'}
+        verdict = sat_verify_result(result.returncode, output)
+        expected = 'proved' if top == 'masked' else 'counterexample'
+        assert verdict == expected, f'{top}: rc={result.returncode}, verdict={verdict}\n{output}'
+        results[top] = {'returncode': result.returncode, 'verdict': verdict,
+                        'log_sha256': hashlib.sha256(output.encode()).hexdigest()}
+    return results
 
 
 def main():

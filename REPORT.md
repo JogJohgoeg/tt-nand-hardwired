@@ -1,8 +1,8 @@
 # H2 validation report / 首片验证报告
 
-2026-10-05: **bd1876b passes test, docs, both core CEC jobs, 2x2 GDS, all 15 prechecks and routed gate simulation.** Wrapper CEC is still pending: its reset proofs passed, then the BLIF guard rejected internal X branches. The prepared fix proves all outputs defined before binary export. The initial optional viewer failed on Pages deployment; a later run at the same commit passes all four physical-workflow jobs, including viewer (receipt below). No physical silicon or full-language-model performance is claimed.
+2026-10-05: **8e139cf passes test, docs, both core CEC jobs, 2x2 GDS, precheck, routed gate simulation and viewer.** Wrapper CEC remains pending: Yosys correctly rejected the leaking-X negative control, but the harness required a missing FAIL banner and stopped before the wrapper proof. Its verdict parser is fixed locally and needs another Actions run. Area/timing numbers below retain their original bd1876b artifact provenance. No physical silicon or full-language-model performance is claimed.
 
-bd1876b 已通过 test/docs、两颗核心 CEC、2x2 GDS、15 项 precheck 和布线后门级仿真。当前待修为 wrapper 形式证明：两侧复位已证，但内部 X 分支触发导出保护；修复后仍需 Actions 实证。4 tile 较原计划增加 €140，正式费用需用户决定。初次 Viewer 因 Pages 配置失败；同提交后续运行已连同 viewer 全绿（回执见下）。DOT 权重仍从输入提供，首片还不包含完整模型或权重 ROM。
+8e139cf 的 test/docs、两颗核心 CEC、gds/precheck/gl_test/viewer 全过。wrapper 的泄漏X负对照已被Yosys拒绝，误报来自脚本要求未输出的FAIL横幅；已补精确判词和实际日志回归，不放宽SAT/CEC条件，新证明仍待Actions。4 tile 较原计划增加 €140，正式费用需用户决定。DOT 权重仍从输入提供，首片还不包含完整模型或权重 ROM。
 
 | Evidence | Coverage | Result |
 |---|---|---|
@@ -87,3 +87,8 @@ The standalone public replay script was also run against block 72440910: all 86 
 [Run 37334330241](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37334330241), at the same bd1876b commit, reports **gds, precheck, gl_test and viewer all successful**. [Read-only status receipt](verification/evidence/gds_rerun_bd1876b.json). The measured area/timing table above remains sourced from run 37331447516 artifacts. This update does not establish the still-pending wrapper CEC or a paid submission.
 
 同提交的后续物理工作流四项均成功，含可选 viewer；不据此推断设置由谁改变。上文面积/时序仍绑定初次成功物理 job 的原始 artifact；wrapper 新证明仍待 Actions。
+
+
+## 8e139cf control-verdict fix
+
+[Formal run 37353300366](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37353300366) passed both cores again. The leaking-X fixture produced `ERROR: Called with -verify and proof did fail!`; the old parser incorrectly also required `model found: FAIL!`. The replacement recognizes explicit counterexamples with exit code 1 and rejects timeouts, signals, generic errors and contradictory verdicts. Four local parser tests include the actual runner log. The SAT query and all 385 output/state/clock obligations are unchanged; full wrapper proof remains pending. [Run receipts](verification/evidence/ci_8e139cf.json). [GDS run 37353300337](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37353300337) passes gds/precheck/gl_test/viewer; its status does not replace the earlier measured area/timing artifacts.

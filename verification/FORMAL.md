@@ -31,6 +31,17 @@ There are no reset/enable/CS assumptions in the definedness proof. The same
 query is tested on a masked-X circuit (must pass) and on a circuit with one
 defined output and one conditionally undefined output (must fail), on Actions.
 
+Actions **8e139cf** again proved both cores. The masked-X control passed, and
+Yosys rejected the leaking-X control with the explicit diagnostic
+`ERROR: Called with -verify and proof did fail!`. The harness incorrectly required
+the additional `model found: FAIL!` banner, which was absent from the captured
+stream. The revised classifier accepts either explicit counterexample format
+with exit code 1; it rejects timeout, signals, generic errors, missing or
+contradictory verdicts. Its regression includes the actual failed-run log.
+The SAT query, observable bits, binary-input conditions and BLIF guard are
+unchanged. The wrapper proof itself has still not run past the control check
+in a successful CI job; another Actions result is required.
+
 For the wrapper, both full cores remain in the flattened design. After unmapping
 synchronous reset and enable into multiplexers, the script checks that exactly
 358 positive-edge flops are driven by `clk`, covering `in_sr`, `out_sr` and
