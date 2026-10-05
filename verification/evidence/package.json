@@ -1,0 +1,81 @@
+{
+  "checked_at": "2026-10-05T14:25:19.344565+00:00",
+  "scope": "Local payload and canonical chain samples verified; formal/GDS/precheck await Actions results",
+  "checks": {
+    "generated_rtl": "pass",
+    "core_vectors": {
+      "cell_279": 32768,
+      "dot32_t": 4112
+    },
+    "cocotb_transactions": 128,
+    "yaml_and_python_syntax": "pass",
+    "standalone_burn_edge_smoke": 16,
+    "dot32_canonical_chain": {
+      "cases": 86,
+      "methods": [
+        "eval",
+        "step"
+      ],
+      "block": 72440910,
+      "standalone_replay": "pass; byte-identical raw returns"
+    }
+  },
+  "pending": [
+    "GitHub formal",
+    "GDS",
+    "precheck",
+    "routed gate simulation",
+    "area and timing"
+  ],
+  "files": {
+    ".github/workflows/docs.yaml": "74135725ac236ca64e1360d9c1b4012cec75a361e5b84104280b1bb74ff919a0",
+    ".github/workflows/formal.yaml": "142443b07a0720a0cd8fba97b82dd4ea9c249f1cedee9c02c694927c6742a53a",
+    ".github/workflows/fpga.yaml": "4c2a85b1f03f87d06c52f93e981f6c9343fdc358bb364f01bd9fa0c333ea8d77",
+    ".github/workflows/gds.yaml": "7c90c5363e9f4770e1e6dd266844cdf918b0ef679dbf359d8e278b8c66dabff6",
+    ".github/workflows/test.yaml": "9325852da3d29503f6959e03ace66f854a50c08a2b85a31574d34b5d64025019",
+    ".gitignore": "90ddc1fb92ca1513ca83b80236c6910fe768b20dad836561cb812c93a0022389",
+    "LICENSE-MIT": "21eb7aa23cf8ff3a7b0dac6cbe781424fe10343efe29005b6e4863f28a9a7aa5",
+    "LICENSE-SPEC": "e1e843ab128abd72ce3e69035abe0d34a4d0e2606784db3ceebabdfb3aa2a6ae",
+    "README.md": "cb6e6c0042b98c641a0f176803b5c3e6d5e9b069eee30f45df745694eed0e8d1",
+    "REPORT.md": "f60293d04f9d65a02817b98cd320372962f498553fd5c185feeefec54cd84246",
+    "docs/info.md": "a18143db927b862ab5c6bb430290ab31c8144ffd5d002bc1a0e1dba36a711989",
+    "info.yaml": "dc2640559e0d98b71bd2e5287e919d97fff66558b421ff8e5fc2182b073bb0ae",
+    "src/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "src/config.json": "5fb65a7f951e1e07ab94d539d616a1a0f0f078d31b995cf6079693722af98e21",
+    "src/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+    "src/project.v": "27e8879437c6e7cd2bbde5327d12afa3e59b7d2f261a46e87374fbaff27c6594",
+    "test/Makefile": "addc5ec962cec382d704f2b8918df5d026a9bed70f2458a40c9e693c5a204d4e",
+    "test/requirements.txt": "c1ba8e1b931e68c3ff600bb849f20975435fedbb7e5f83932095a05d2dca1372",
+    "test/tb.v": "18252573ee16975628d5c587c066b2aa7e9c367fe8b569e4f2adea0514a6d62f",
+    "test/test.py": "0fd8c02a90e31917af8265afd6f8b04b5faa0a05c6ab252e1f35111a288773ce",
+    "verification/burn/README.md": "1182ea23d0b4ee8b85bd34f38d25df34e39cc275bc761e98d28522dfb7ecd9a4",
+    "verification/burn/dot32_t_xlayer.json": "c9242e26a6907c7091787c45cb89eedb85e1b16680b7e86917193df460ccd276",
+    "verification/burn/verification.json": "22d96514ba5554cb40a967bb97c7c83886e7e7f96ec50ee9a0ea065a249077ba",
+    "verification/chain_vectors/dot32_t.jsonl": "1f792197d874c6145e3ab46dd29f9de2e7453b124c981925f0708a73c6cf4a6d",
+    "verification/chain_vectors/manifest.json": "54911c494110e8804c779a517bfaf36cf6f65ed007489f250bd39a541ab9de03",
+    "verification/evidence/chain.json": "67175eef43bf7a8bb8652f7a2b349ae62e4a439038615d8a64fb2a6433608bd5",
+    "verification/evidence/chain_inventory.json": "89431cdae3e492525cdf81f1c0e12701c610c3a005c9836a09964e5a7b7827ee",
+    "verification/evidence/cocotb-local.xml": "985dffb4f71ba29733a163f4977d9963c7e1e3d22389de9a51300ef93b067027",
+    "verification/evidence/cores-local.json": "032250071ae5688376c75babac73bcb166f497b59aa07d13f511f844be7e9080",
+    "verification/evidence/local-files.json": "3090326c852adab3d51264475228022f32bcc7469cbf6a0c163aa1d8b2655c77",
+    "verification/evidence/pricing.json": "c8f4855843483c6fe4957645752040a19ce042d5d3b701eb7d96d13b29063ecd",
+    "verification/evidence/simulation.json": "1238648510b29f2ef84b0f51d04c66fa8d6d13d6290e95082ab104d98ea7e4ce",
+    "verification/evidence/standalone_dot32_chain.json": "92b3f9ba5dbe81bf8a89e9cb46af38615ed4f6ee460bd5cda55e03b317582386",
+    "verification/evidence/wrapper.json": "6869aec99e82750a0768d63d18dd874fff0c1047650aa0fdc506c4cf8d74ba0d",
+    "verification/evidence/xlayer_dot32_cid3.json": "f74459b12482adae74d675370373c63b6a915865e029eea0028e5ba16dc215f5",
+    "verification/formal.py": "163397f741b6f0dbe7cebceb49a1f14bef2f23bbe6e9008e8aa6ad837c1750e4",
+    "verification/gen_verilog.py": "06826c60629224a49c3b308daa2c947a52e0ab8715ce40d5464ff3c5f9184115",
+    "verification/golden.py": "f0b00eef03b833896efdee9a683576542fb0edccee60b29350dfdd32d00d2d45",
+    "verification/l1_vectors.json": "0e930e8e8c3e87d25f313d0adf40805d1b7fce867d758752d8ab49358ec0ff65",
+    "verification/reference.py": "1f7abbe2ea12b2e9a60b1758cc5b8eb25b105347cf7fbc11e118bf984ec2d04c",
+    "verification/requirements.txt": "5e7cb66d2a3374454132a5ff73596f40061357a52fe40d3f100840077d8cc547",
+    "verification/sources.json": "99f97235d7666f78d889f717e9971e40814e9230902c39c6623e97d22bdffe58",
+    "verification/test_cores.py": "3b8566325a8b754677a242689cfaecce4c1a99a4d80ee89d68be6e99ca06a071",
+    "verification/upstream/LICENSE": "543c2be778d70dc7f36fda23a8bf121157ef6e71c05ef91bb4d1cbe206805094",
+    "verification/upstream/README.md": "c55481040866d36fca85e4d2f541a178fc544c843dcddac004c555aae8cf7d67",
+    "verification/upstream/l1.py": "498d2958c64b1c5aaa8a031c91aaffd690d5f6644938cf0ea7290ecb767b3bc1",
+    "verification/upstream/l2.py": "cfa50181cf5b4f4b15c214f4b19735758e44a5603600a6a8e5165c290aacbe41",
+    "verification/verify_burn.py": "147d44db0e0fa6e784245162d6f3783cacd5717ab88ff90669389aa896361d57",
+    "verification/verify_chain.py": "5f6ec6f9893e67cf75d9609ca2e68f0eda61fc92d85871e0d418ba2ebb0d3189"
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "scope": "RTL simulation, not post-synthesis/formal/physical signoff",
+  "source_sha256": {
+    "cell_279": "f35baa03be7f9eefba33d778e0ff5b6e1430ccbb7b5b4a9daa81695b186c26c0",
+    "dot32_t": "b1507f55d3bd80bbc55f9e06dc656d81e049138827c97ec7fe640d7bfa2ce0b7"
+  },
+  "files": {
+    "sources.json": "99f97235d7666f78d889f717e9971e40814e9230902c39c6623e97d22bdffe58",
+    "l1_vectors.json": "0e930e8e8c3e87d25f313d0adf40805d1b7fce867d758752d8ab49358ec0ff65",
+    "gen_verilog.py": "43c3ce672e81c53434c2f4c818af1e8dc8ed28d79d1a704303e6d8f097c1b040",
+    "verify_sim.py": "8fc6485ff39324c23baf6fd2871a935fd47b6417dcaa93435a3b85da1317e210",
+    "rtl/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "tb_cell_279.v": "f28e2de4ce23f3b8560aaaa6111ea43f4bb785a96bacc5fd767ebcb7f7ecb660",
+    "rtl/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+    "tb_dot32_t.v": "df687ddb05a19a2b6ffd634fa63212ef7dc88f0189f7934c667d6b27caf8404c"
+  },
+  "golden_sha256": "f0b00eef03b833896efdee9a683576542fb0edccee60b29350dfdd32d00d2d45",
+  "tests": {
+    "cell_279_iverilog": {
+      "vectors": 32768,
+      "returncode": 0,
+      "seconds": 0.067,
+      "stim_sha256": "4b6b4f6edb195b793471972b3ca24754b615817fabdef66ff0cd729d5181e5f5",
+      "log_sha256": "5f7c54bffd15e49af4a6519f3e95f1dad9f4c26a82749a6def232213da23eee7",
+      "passed": true,
+      "negative_control": false
+    },
+    "cell_279_iverilog_flipped": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.007,
+      "stim_sha256": "a79122992d53d358e6bbbbb98883d64fa0c15df3bcb08ff7b65a0580870af424",
+      "log_sha256": "714b6df901097c6073d261d36851488cbc0a05b935b30e9b0a98c5ea90ca40f0",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_iverilog_truncated": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.007,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "2d85e0266339186c86cb440db950c4ef51c54723c2525cabe6a8d2a75c421c7d",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_iverilog_malformed": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.007,
+      "stim_sha256": "28fca28ef02d08bd61931c03999b7a5b822392132867682e88b2db492ee9f087",
+      "log_sha256": "2d85e0266339186c86cb440db950c4ef51c54723c2525cabe6a8d2a75c421c7d",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_iverilog_extra": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.007,
+      "stim_sha256": "a987a078cae2f800cb79597c97182176a5c5284af976c13764dc532e2f4dea8f",
+      "log_sha256": "27aab14cbd2e54bf91d9d5f2d4e67aa80cf138df0f4c52403aa37bef927de0c5",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_iverilog_zero_count": {
+      "vectors": 0,
+      "returncode": 1,
+      "seconds": 0.006,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "496f2a3f48210fafd987aa3300d29596142fe48878de5e80b7e401512f924bfa",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_verilator": {
+      "vectors": 32768,
+      "returncode": 0,
+      "seconds": 0.226,
+      "stim_sha256": "4b6b4f6edb195b793471972b3ca24754b615817fabdef66ff0cd729d5181e5f5",
+      "log_sha256": "8dec02d0b5a4abf9806a21d46ed4a6f06c487bd83ece713b83095a3fc1bf0d37",
+      "passed": true,
+      "negative_control": false
+    },
+    "cell_279_verilator_flipped": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.004,
+      "stim_sha256": "a79122992d53d358e6bbbbb98883d64fa0c15df3bcb08ff7b65a0580870af424",
+      "log_sha256": "d4c5752f326deba4434976f1aa1c12fd38cfe3fb5e5e2a9fd8b508a2db5487b7",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_verilator_truncated": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.003,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "9aeb83e0200d30f6d647a8c1408762bacd2f7eae96a7a96b7bee4118b7a9d96c",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_verilator_malformed": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.003,
+      "stim_sha256": "28fca28ef02d08bd61931c03999b7a5b822392132867682e88b2db492ee9f087",
+      "log_sha256": "9aeb83e0200d30f6d647a8c1408762bacd2f7eae96a7a96b7bee4118b7a9d96c",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_verilator_extra": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.003,
+      "stim_sha256": "a987a078cae2f800cb79597c97182176a5c5284af976c13764dc532e2f4dea8f",
+      "log_sha256": "4f7f7385ae4dd08474d663be2946b1dc3ba159129fd50095fa371e47d456ac1d",
+      "passed": false,
+      "negative_control": true
+    },
+    "cell_279_verilator_zero_count": {
+      "vectors": 0,
+      "returncode": 1,
+      "seconds": 0.003,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "fb1024ba963a1361e54a30aa87e76bf694ee546194542794e186254135eecd75",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_iverilog": {
+      "vectors": 4112,
+      "returncode": 0,
+      "seconds": 1.203,
+      "stim_sha256": "f142fff359c268dfcddf9b268171a27a05e3215e19722d06978e728afcba48dd",
+      "log_sha256": "f1caebfab0cd4bce88c6eda4d20aaccb0ccdf72c830c99157c3b094bfeb3b73b",
+      "passed": true,
+      "negative_control": false
+    },
+    "dot32_t_iverilog_flipped": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.029,
+      "stim_sha256": "349d87e18e671244815bc25a602a390c7b4e6a0fe4b5adf2c21ec1906d286338",
+      "log_sha256": "ba486483842c8f6399bcfb472d3fdf029feaca0c666eca4d56f6b64841bde7f3",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_iverilog_truncated": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.03,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "70977f20103b81b2766ca0b218c910ad7acbe37784951fd5130ea3d2588ba120",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_iverilog_malformed": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.025,
+      "stim_sha256": "28fca28ef02d08bd61931c03999b7a5b822392132867682e88b2db492ee9f087",
+      "log_sha256": "70977f20103b81b2766ca0b218c910ad7acbe37784951fd5130ea3d2588ba120",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_iverilog_extra": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.027,
+      "stim_sha256": "a5e5ddc8a82cbe9b9a8ced201fca40e53ba4c544fe0d0fe041c4fb2acb1cf396",
+      "log_sha256": "18c6831f7cef3f6e6665171e3cf075d9df84d18be24d3e308d7a480166bdb303",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_iverilog_zero_count": {
+      "vectors": 0,
+      "returncode": 1,
+      "seconds": 0.025,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "1156adaedd4eaaec967c1fc37815d5c84079fca0af93bc5ba236d91446f13a5c",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_verilator": {
+      "vectors": 4112,
+      "returncode": 0,
+      "seconds": 0.125,
+      "stim_sha256": "f142fff359c268dfcddf9b268171a27a05e3215e19722d06978e728afcba48dd",
+      "log_sha256": "b0c2ae6f2401e88bb63f28e2fec8ff85f918af143db56198c24bf24bb5c20c79",
+      "passed": true,
+      "negative_control": false
+    },
+    "dot32_t_verilator_flipped": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.003,
+      "stim_sha256": "349d87e18e671244815bc25a602a390c7b4e6a0fe4b5adf2c21ec1906d286338",
+      "log_sha256": "42dffc14b23dc0fc40828a3be017673d48ed5226171db48e5eb98862e9eed112",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_verilator_truncated": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.002,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "d39c2c049d53adb8ef4e1bc044e0d85b089364207632263a430753fe53c1c2ba",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_verilator_malformed": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.003,
+      "stim_sha256": "28fca28ef02d08bd61931c03999b7a5b822392132867682e88b2db492ee9f087",
+      "log_sha256": "d39c2c049d53adb8ef4e1bc044e0d85b089364207632263a430753fe53c1c2ba",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_verilator_extra": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.002,
+      "stim_sha256": "a5e5ddc8a82cbe9b9a8ced201fca40e53ba4c544fe0d0fe041c4fb2acb1cf396",
+      "log_sha256": "9960ccfae95cdff006746892cf6acb9bc5ae2a194439dded1c6c249275aea011",
+      "passed": false,
+      "negative_control": true
+    },
+    "dot32_t_verilator_zero_count": {
+      "vectors": 0,
+      "returncode": 1,
+      "seconds": 0.003,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "9e8249fdc079bbb79236d8cd6372a4d5b7f886cc3fa65a880ed62b7d03560c3d",
+      "passed": false,
+      "negative_control": true
+    }
+  },
+  "counts": {
+    "cell_279": 32768,
+    "dot32_t": 4112
+  }
+}

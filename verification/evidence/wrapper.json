@@ -1,0 +1,88 @@
+{
+  "scope": "port-level RTL simulation; no synthesis or physical signoff",
+  "available_vectors": {
+    "cell_279": 32768,
+    "dot32_t": 4112
+  },
+  "tests": {
+    "wrap_iverilog": {
+      "vectors": 143,
+      "returncode": 0,
+      "seconds": 11.938,
+      "stim_sha256": "8a752b889a219acda496613cb2b92f68b43fc2b17e1bf93076b9b6dedfe6fa8a",
+      "log_sha256": "5b0487564e744bf2989f907d23fef80b7db8bfd92024710e9ed8eecd91a9a976",
+      "passed": true,
+      "negative_control": false,
+      "core_counts": {
+        "0": 49,
+        "1": 94
+      }
+    },
+    "wrap_iverilog_flipped": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.039,
+      "stim_sha256": "1aff441c5e0ce0012d8c5dc4cd74906bb2303165d36b02e179678e3833ac3a4a",
+      "log_sha256": "c09ae94f2b10de58b3b7a1bcd8237969211c59be35f9d0be5e8c0c2fbdca43de",
+      "passed": false,
+      "negative_control": true
+    },
+    "wrap_iverilog_empty": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.034,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "6177291c8c35ce3f347617995c30299db71d11b4bf43c5a5d5b4906d7220e6bd",
+      "passed": false,
+      "negative_control": true
+    },
+    "wrap_verilator": {
+      "vectors": 36880,
+      "returncode": 0,
+      "seconds": 2.51,
+      "stim_sha256": "4efe54d94562b30f1ab9e292aa3ea60bc72c55ed3811c226c61af26bbf200f4a",
+      "log_sha256": "f04d286e4d9b02e05e9c06292158b8a1596666817f1956ba315707e4c2f1014d",
+      "passed": true,
+      "negative_control": false,
+      "core_counts": {
+        "0": 32768,
+        "1": 4112
+      }
+    },
+    "wrap_verilator_flipped": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.005,
+      "stim_sha256": "1aff441c5e0ce0012d8c5dc4cd74906bb2303165d36b02e179678e3833ac3a4a",
+      "log_sha256": "b288c041909381ab2910c2b18e4b79e1d649fbc932aa3016d63b6114a8c24537",
+      "passed": false,
+      "negative_control": true
+    },
+    "wrap_verilator_empty": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.004,
+      "stim_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_sha256": "b7f7deb6aba64de359632bab30628604c1a6f61a088a4e66fd7010bedefc51ab",
+      "passed": false,
+      "negative_control": true
+    },
+    "legacy_wrapper_rejected": {
+      "vectors": 1,
+      "returncode": 1,
+      "seconds": 0.041,
+      "stim_sha256": "63789ef0bc424f38108a1865df528fa69c6c4ecd37bc5486e78c8e2e964e21d2",
+      "log_sha256": "c09ae94f2b10de58b3b7a1bcd8237969211c59be35f9d0be5e8c0c2fbdca43de",
+      "passed": false,
+      "negative_control": true
+    }
+  },
+  "files": {
+    "verify_wrap.py": "9eb78afd837141b96cddb3a27d2711b49382ff698ce1677815baa3813c78673a",
+    "verify_sim.py": "8fc6485ff39324c23baf6fd2871a935fd47b6417dcaa93435a3b85da1317e210",
+    "tb_wrap.v": "16d715ad851737bc116eeed891ae14bd868ca9c7387ece561fd7afd5a70d79a1",
+    "rtl/tt_um_hardwired.v": "3c35552edae47234edef136b9ca37a2c0c13e6d39b24385448a90d94017d84ea",
+    "rtl/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "rtl/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59"
+  }
+}

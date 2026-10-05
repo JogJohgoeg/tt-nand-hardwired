@@ -1,0 +1,24 @@
+{
+  "cell_279": {
+    "vectors": 32768,
+    "mismatches": 0,
+    "negative_controls": [
+      "flipped",
+      "empty"
+    ],
+    "netlist_sha256": "f35baa03be7f9eefba33d778e0ff5b6e1430ccbb7b5b4a9daa81695b186c26c0",
+    "rtl_sha256": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "stim_sha256": "7ba3866a5c8362bd46f253cbed8ce9e6c5957494436e4aeb97af1b966332c548"
+  },
+  "dot32_t": {
+    "vectors": 4112,
+    "mismatches": 0,
+    "negative_controls": [
+      "flipped",
+      "empty"
+    ],
+    "netlist_sha256": "b1507f55d3bd80bbc55f9e06dc656d81e049138827c97ec7fe640d7bfa2ce0b7",
+    "rtl_sha256": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+    "stim_sha256": "7789d6047fcc2c274469bd600c6c7a4f9855dbbb9e62faeaf4d309a8657e7ac4"
+  }
+}

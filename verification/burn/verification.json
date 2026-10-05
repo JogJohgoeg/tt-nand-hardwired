@@ -1,0 +1,50 @@
+{
+  "artifact": "dot32_t_xlayer.json",
+  "artifact_sha256": "c9242e26a6907c7091787c45cb89eedb85e1b16680b7e86917193df460ccd276",
+  "netlist_sha256": "b1507f55d3bd80bbc55f9e06dc656d81e049138827c97ec7fe640d7bfa2ce0b7",
+  "bytes": 26803,
+  "nIn": 320,
+  "nOut": 32,
+  "nNand": 3829,
+  "nLatch": 0,
+  "target": {
+    "chain": "X Layer",
+    "chain_id": 196,
+    "tape_id": 245,
+    "circuit_contract": "0xA93E807fAB41431827EBBa57443Fb687a95E2AA3",
+    "method": "tapeout(bytes,uint32,uint32)",
+    "transactions": 0
+  },
+  "l1": {
+    "generator": "21nandkit/l1.py:case_dot",
+    "multiplier": 20,
+    "seed": 21,
+    "rng_scope": "fresh standalone DOT run (not historical multi-component RNG state)",
+    "numpy": "2.0.2",
+    "cases": 1000016,
+    "output_bits_compared": 32000512,
+    "mismatches": 0,
+    "batch_max": 256,
+    "vectors_sha256": "164ce6f782de86e967d5f7187f74735439f82d98d34e5d6a1a029da8fe29e201",
+    "hash_encoding": "concatenate input as 40-byte LE then output as 4-byte LE for each row",
+    "inputs_sha256": "c4b5e9a9d139d98d3815a59626b40fcb9eff296f6a96f24e82d22550fd0d2241",
+    "outputs_sha256": "02dadeb8ef61de4c10083d5c843730dafe86f00717c94903a4f567795e90aade"
+  },
+  "l2": {
+    "status": "not_applicable",
+    "components": [
+      "FMUL_BF16"
+    ],
+    "reason": "21nandkit L2 covers FMUL_BF16 only; no DOT32_T L2 vector set exists"
+  },
+  "negative_control": "one-bit output error detected",
+  "files": {
+    "verify_burn.py": "901799c6765068e143a909dc3f028a4248b296d785a2d014d7c2e827837735c4",
+    "verify_sim.py": "8fc6485ff39324c23baf6fd2871a935fd47b6417dcaa93435a3b85da1317e210",
+    "golden.py": "f0b00eef03b833896efdee9a683576542fb0edccee60b29350dfdd32d00d2d45",
+    "21nandkit/l1.py": "498d2958c64b1c5aaa8a031c91aaffd690d5f6644938cf0ea7290ecb767b3bc1",
+    "21nandkit/l2.py": "cfa50181cf5b4f4b15c214f4b19735758e44a5603600a6a8e5165c290aacbe41"
+  },
+  "scope": "local golden vs all generated L1 vectors; no onchain or post-synthesis equivalence claim",
+  "seconds": 407.608
+}

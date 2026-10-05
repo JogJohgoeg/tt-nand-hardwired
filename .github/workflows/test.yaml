@@ -1,8 +1,11 @@
 name: test
-on: [push, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - name: Checkout repo
         uses: actions/checkout@v6
@@ -22,6 +25,11 @@ jobs:
       - name: Install Python packages
         shell: bash
         run: pip install -r test/requirements.txt
+
+      - name: Verify generated RTL and both combinational cores
+        run: |
+          python verification/gen_verilog.py --check
+          python verification/test_cores.py
 
       - name: Run tests
         run: |
@@ -46,3 +54,5 @@ jobs:
             test/tb.fst
             test/results.xml
             test/output/*
+            build/cores/*.json
+            build/cores/*.log

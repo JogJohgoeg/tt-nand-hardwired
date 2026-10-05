@@ -1,0 +1,25 @@
+name: formal
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  equivalence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install Yosys and ABC on the runner
+        run: sudo apt-get update && sudo apt-get install -y yosys
+      - name: Check generated NAND netlists
+        run: python verification/gen_verilog.py --check
+      - name: Prove synthesis equivalence and reject a negative control
+        run: python verification/formal.py
+      - name: Preserve proofs and synthesized netlists
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: formal-evidence
+          path: build/formal/

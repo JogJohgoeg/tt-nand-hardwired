@@ -1,0 +1,12 @@
+{
+  "circuit": "3.2.245",
+  "chain_id": 196,
+  "cpu": "0xA93E807fAB41431827EBBa57443Fb687a95E2AA3",
+  "cid": 3,
+  "netlist_sha256": "b1507f55d3bd80bbc55f9e06dc656d81e049138827c97ec7fe640d7bfa2ce0b7",
+  "rows": 86,
+  "file": "dot32_t.jsonl",
+  "sha256": "1f792197d874c6145e3ab46dd29f9de2e7453b124c981925f0708a73c6cf4a6d",
+  "input_encoding": "decimal integer as string (320 bits); bit i is input i",
+  "output_encoding": "unsigned 32-bit integer; signed result modulo 2^32"
+}

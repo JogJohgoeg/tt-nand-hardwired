@@ -1,42 +1,27 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
+# Auditable NAND hard logic on Tiny Tapeout
 
-# Tiny Tapeout Verilog Project Template
+A SKY130 Tiny Tapeout candidate containing circuit #279 (21 NANDs) and DOT32_T (3,829 NANDs), generated mechanically from pinned TapeOut gate records. DOT weights are runtime inputs; this is a first arithmetic demonstrator, not a complete hardwired LLM.
 
-- [Read the documentation for project](docs/info.md)
+The [datasheet](docs/info.md) specifies the serial protocol. [Verification evidence](verification/evidence/) records the local tests and both cores’ canonical chain checks. The [report](REPORT.md) distinguishes measured results from pending synthesis, physical and chain work.
 
-## What is Tiny Tapeout?
+```sh
+python verification/gen_verilog.py --check
+python verification/test_cores.py
+python -m pip install -r test/requirements.txt
+cd test
+make
+python -m cocotb_tools.check_results results.xml
+```
 
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
+These commands run Python and small gate simulations only. Yosys/ABC synthesis and formal checks run in [GitHub Actions](.github/workflows/formal.yaml). The official `ttsky26d` actions produce GDS, precheck and gate-level simulation. A local metadata-only preview is `python verification/formal.py --prepare`. No local synthesis is required.
 
-To learn more and get started, visit https://tinytapeout.com.
+Generated cores must be changed by changing the source records and regenerating them. All new code is MIT ([LICENSE-MIT](LICENSE-MIT)); the inherited Tiny Tapeout template remains Apache-2.0 ([LICENSE](LICENSE)). The protocol specification is CC0-1.0 ([LICENSE-SPEC](LICENSE-SPEC)).
 
-## Set up your Verilog project
+Read-only chain replay (standard library; public RPC access required):
 
-1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Adapt the testbench to your design. See [test/README.md](test/README.md) for more information.
+```sh
+python verification/verify_chain.py --core cell_279
+python verification/verify_chain.py --core dot32_t --block 72440910
+```
 
-The GitHub action will automatically build the ASIC files using [LibreLane](https://www.zerotoasiccourse.com/terminology/librelane/).
-
-## Enable GitHub actions to build the results page
-
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
-
-## Resources
-
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
-
-## What next?
-
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
-  - Bluesky [@tinytapeout.com](https://bsky.app/profile/tinytapeout.com)
+The published DOT circuit is #3@2.245. These scripts make only canonical `eth_call`/metadata requests, with no state overrides or transactions.
