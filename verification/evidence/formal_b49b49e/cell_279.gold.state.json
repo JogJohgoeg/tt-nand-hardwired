@@ -1,0 +1,671 @@
+{
+  "creator": "Yosys 0.33 (git sha1 2584903a060)",
+  "modules": {
+    "cell_279": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "src/cell_279.v:5.1-45.10"
+      },
+      "ports": {
+        "din": {
+          "direction": "input",
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+        },
+        "dout": {
+          "direction": "output",
+          "bits": [ 17, 18 ]
+        }
+      },
+      "cells": {
+        "$auto$simplemap.cc:38:simplemap_not$120": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "Y": [ 19 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$122": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 15 ],
+            "Y": [ 20 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$124": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 21 ],
+            "Y": [ 22 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$126": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 23 ],
+            "Y": [ 24 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$128": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 25 ],
+            "Y": [ 26 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$129": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7 ],
+            "Y": [ 27 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$131": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 28 ],
+            "Y": [ 29 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$134": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 6 ],
+            "Y": [ 30 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$137": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 31 ],
+            "Y": [ 32 ]
+          }
+        },
+        "$auto$simplemap.cc:38:simplemap_not$139": {
+          "hide_name": 1,
+          "type": "$_NOT_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:0.0-0.0"
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 33 ],
+            "Y": [ 18 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$121": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:24.20-24.37"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 15 ],
+            "B": [ 19 ],
+            "Y": [ 34 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$123": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:28.20-28.37"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 3 ],
+            "B": [ 20 ],
+            "Y": [ 21 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$125": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:29.20-29.37"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 10 ],
+            "B": [ 34 ],
+            "Y": [ 23 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$127": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:30.20-30.37"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 13 ],
+            "B": [ 22 ],
+            "Y": [ 25 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$130": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:32.20-32.37"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 12 ],
+            "B": [ 27 ],
+            "Y": [ 28 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$132": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:33.20-33.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 24 ],
+            "B": [ 26 ],
+            "Y": [ 35 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$133": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:35.20-35.37"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 5 ],
+            "B": [ 35 ],
+            "Y": [ 36 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$135": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:37.20-37.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 11 ],
+            "B": [ 30 ],
+            "Y": [ 31 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$136": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:40.20-40.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 29 ],
+            "B": [ 36 ],
+            "Y": [ 17 ]
+          }
+        },
+        "$auto$simplemap.cc:75:simplemap_bitop$138": {
+          "hide_name": 1,
+          "type": "$_AND_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "src/cell_279.v:43.20-43.38"
+          },
+          "port_directions": {
+            "A": "input",
+            "B": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 26 ],
+            "B": [ 32 ],
+            "Y": [ 33 ]
+          }
+        }
+      },
+      "netnames": {
+        "$and$src/cell_279.v:28$11_Y": {
+          "hide_name": 1,
+          "bits": [ 21 ],
+          "attributes": {
+            "src": "src/cell_279.v:28.20-28.37"
+          }
+        },
+        "$and$src/cell_279.v:29$13_Y": {
+          "hide_name": 1,
+          "bits": [ 23 ],
+          "attributes": {
+            "src": "src/cell_279.v:29.20-29.37"
+          }
+        },
+        "$and$src/cell_279.v:30$15_Y": {
+          "hide_name": 1,
+          "bits": [ 25 ],
+          "attributes": {
+            "src": "src/cell_279.v:30.20-30.37"
+          }
+        },
+        "$and$src/cell_279.v:32$19_Y": {
+          "hide_name": 1,
+          "bits": [ 28 ],
+          "attributes": {
+            "src": "src/cell_279.v:32.20-32.37"
+          }
+        },
+        "$and$src/cell_279.v:43$41_Y": {
+          "hide_name": 1,
+          "bits": [ 33 ],
+          "attributes": {
+            "src": "src/cell_279.v:43.20-43.38"
+          }
+        },
+        "din": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ],
+          "attributes": {
+            "src": "src/cell_279.v:5.35-5.38"
+          }
+        },
+        "dout": {
+          "hide_name": 0,
+          "bits": [ 17, 18 ],
+          "attributes": {
+            "src": "src/cell_279.v:5.58-5.62"
+          }
+        },
+        "w0": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "src": "src/cell_279.v:6.10-6.12"
+          }
+        },
+        "w1": {
+          "hide_name": 0,
+          "bits": [ "1" ],
+          "attributes": {
+            "src": "src/cell_279.v:7.10-7.12"
+          }
+        },
+        "w10": {
+          "hide_name": 0,
+          "bits": [ 10 ],
+          "attributes": {
+            "src": "src/cell_279.v:16.10-16.13"
+          }
+        },
+        "w11": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "src": "src/cell_279.v:17.10-17.13"
+          }
+        },
+        "w12": {
+          "hide_name": 0,
+          "bits": [ 12 ],
+          "attributes": {
+            "src": "src/cell_279.v:18.10-18.13"
+          }
+        },
+        "w13": {
+          "hide_name": 0,
+          "bits": [ 13 ],
+          "attributes": {
+            "src": "src/cell_279.v:19.10-19.13"
+          }
+        },
+        "w14": {
+          "hide_name": 0,
+          "bits": [ 14 ],
+          "attributes": {
+            "src": "src/cell_279.v:20.10-20.13",
+            "unused_bits": "0 "
+          }
+        },
+        "w15": {
+          "hide_name": 0,
+          "bits": [ 15 ],
+          "attributes": {
+            "src": "src/cell_279.v:21.10-21.13"
+          }
+        },
+        "w16": {
+          "hide_name": 0,
+          "bits": [ 16 ],
+          "attributes": {
+            "src": "src/cell_279.v:22.10-22.13",
+            "unused_bits": "0 "
+          }
+        },
+        "w17": {
+          "hide_name": 0,
+          "bits": [ 19 ],
+          "attributes": {
+            "src": "src/cell_279.v:23.10-23.13"
+          }
+        },
+        "w19": {
+          "hide_name": 0,
+          "bits": [ 34 ],
+          "attributes": {
+            "src": "src/cell_279.v:25.10-25.13"
+          }
+        },
+        "w2": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "src/cell_279.v:8.10-8.12",
+            "unused_bits": "0 "
+          }
+        },
+        "w20": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "src/cell_279.v:26.10-26.13"
+          }
+        },
+        "w21": {
+          "hide_name": 0,
+          "bits": [ 20 ],
+          "attributes": {
+            "src": "src/cell_279.v:27.10-27.13"
+          }
+        },
+        "w22": {
+          "hide_name": 0,
+          "bits": [ 22 ],
+          "attributes": {
+            "src": "src/cell_279.v:28.10-28.13"
+          }
+        },
+        "w23": {
+          "hide_name": 0,
+          "bits": [ 24 ],
+          "attributes": {
+            "src": "src/cell_279.v:29.10-29.13"
+          }
+        },
+        "w24": {
+          "hide_name": 0,
+          "bits": [ 26 ],
+          "attributes": {
+            "src": "src/cell_279.v:30.10-30.13"
+          }
+        },
+        "w25": {
+          "hide_name": 0,
+          "bits": [ 27 ],
+          "attributes": {
+            "src": "src/cell_279.v:31.10-31.13"
+          }
+        },
+        "w26": {
+          "hide_name": 0,
+          "bits": [ 29 ],
+          "attributes": {
+            "src": "src/cell_279.v:32.10-32.13"
+          }
+        },
+        "w28": {
+          "hide_name": 0,
+          "bits": [ 35 ],
+          "attributes": {
+            "src": "src/cell_279.v:34.10-34.13"
+          }
+        },
+        "w3": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "src/cell_279.v:9.10-9.12"
+          }
+        },
+        "w30": {
+          "hide_name": 0,
+          "bits": [ 30 ],
+          "attributes": {
+            "src": "src/cell_279.v:36.10-36.13"
+          }
+        },
+        "w32": {
+          "hide_name": 0,
+          "bits": [ 31 ],
+          "attributes": {
+            "src": "src/cell_279.v:38.10-38.13"
+          }
+        },
+        "w33": {
+          "hide_name": 0,
+          "bits": [ 36 ],
+          "attributes": {
+            "src": "src/cell_279.v:39.10-39.13"
+          }
+        },
+        "w35": {
+          "hide_name": 0,
+          "bits": [ 32 ],
+          "attributes": {
+            "src": "src/cell_279.v:41.10-41.13"
+          }
+        },
+        "w36": {
+          "hide_name": 0,
+          "bits": [ 17 ],
+          "attributes": {
+            "src": "src/cell_279.v:42.10-42.13"
+          }
+        },
+        "w37": {
+          "hide_name": 0,
+          "bits": [ 18 ],
+          "attributes": {
+            "src": "src/cell_279.v:43.10-43.13"
+          }
+        },
+        "w4": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "src/cell_279.v:10.10-10.12",
+            "unused_bits": "0 "
+          }
+        },
+        "w5": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "src/cell_279.v:11.10-11.12"
+          }
+        },
+        "w6": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "src/cell_279.v:12.10-12.12"
+          }
+        },
+        "w7": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "src/cell_279.v:13.10-13.12"
+          }
+        },
+        "w8": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "src/cell_279.v:14.10-14.12",
+            "unused_bits": "0 "
+          }
+        },
+        "w9": {
+          "hide_name": 0,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "src/cell_279.v:15.10-15.12",
+            "unused_bits": "0 "
+          }
+        }
+      }
+    }
+  }
+}

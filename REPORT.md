@@ -1,8 +1,27 @@
 # H2 validation report / 首片验证报告
 
-2026-10-05: **8e139cf passes test, docs, both core CEC jobs, 2x2 GDS, precheck, routed gate simulation and viewer.** Wrapper CEC remains pending: Yosys correctly rejected the leaking-X negative control, but the harness required a missing FAIL banner and stopped before the wrapper proof. Its verdict parser is fixed locally and needs another Actions run. Area/timing numbers below retain their original bd1876b artifact provenance. No physical silicon or full-language-model performance is claimed.
+**2026-10-05: first-chip verification is complete at `b49b49e4f0abd0521220d4f39227774d748c9d79`. All four Actions workflows pass, including both cores and the full wrapper formal proof, GDS, precheck, routed gate simulation and viewer.** Local golden/chain evidence remains valid. The next step is the user's paid-submission decision, with the exact configuration, price and portal procedure in [SUBMISSION.md](SUBMISSION.md).
 
-8e139cf 的 test/docs、两颗核心 CEC、gds/precheck/gl_test/viewer 全过。wrapper 的泄漏X负对照已被Yosys拒绝，误报来自脚本要求未输出的FAIL横幅；已补精确判词和实际日志回归，不放宽SAT/CEC条件，新证明仍待Actions。4 tile 较原计划增加 €140，正式费用需用户决定。DOT 权重仍从输入提供，首片还不包含完整模型或权重 ROM。
+**首片验证闭环：b49b49e 的 test、docs、formal、gds 四条工作流全部成功，三项形式证明与全部物理 job 全过。** 最终配置是 2x2 / 4 tile、10 MHz。付费提交尚未执行；4 tile 费用和开发板选项见提交清单。DOT 权重仍从输入提供，首片是点积单元与小控制器。
+
+## b49b49e final evidence / 最终验证证据
+
+| Workflow | Run | Verified result |
+|---|---|---|
+| formal | [37359551360](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359551360) | cell_279 **0.032 s**, DOT32_T **0.716 s**, wrapper **0.766 s**; all three actual-output mutations rejected |
+| gds | [37359561071](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359561071) | gds / precheck / gl_test / viewer all success; **15/15 prechecks**, **128 gate-level transactions** |
+| test | [37359423132](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359423132) | Source generation, cores and serial cocotb pass |
+| docs | [37359423101](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359423101) | Documentation build passes |
+
+All runs above identify the same full commit. [CI receipt](verification/evidence/ci_b49b49e.json), [formal artifacts and manifest](verification/evidence/formal_b49b49e/manifest.json), [physical artifacts and manifest](verification/evidence/physical_b49b49e/manifest.json). The 46 formal files are retained, compressing larger proof models without changing their decompressed bytes; all 18 distinct receipt-bound file hashes were checked. The physical manifest hashes 1,090 downloaded files. The original failure receipts remain historical evidence.
+
+Wrapper closure includes both reset base cases, both 385-output definedness checks before X normalization, and full transition CEC over 377 current-state/input bits and 385 next-state/output/clock bits. Masked-X passes; leaking-X is rejected; inverting the synthesized next-state output produces a counterexample. All 358 state bits are covered and the arithmetic cores remain present. After the documented synchronous reset, induction covers arbitrary subsequent input sequences. This is generic synthesis equivalence; the final SKY130 routed netlist additionally passes finite gate-level simulation.
+
+最终 wrapper 证明包含复位基例、两侧全部 385 位输出确定性及完整一步状态转换等价；实际翻转下一状态位的负控被检出。复位后可归纳覆盖任意长输入序列。链上对拍仍是已列出的固定区块有限向量，并不扩写成链上全域形式证明。
+
+Fresh metrics from **run 37359561071** independently reproduce: standard cells excluding fillers **39,784.4 µm²**, core **72,564.6 µm²**, utilization **54.8262%**, worst setup/hold **+58.283776 / +0.107796 ns** at the **100 ns** constraint, TNS **0**, route/Magic DRC and LVS **0**. The max-slew count remains **226** and max-cap count **0**. These values are now bound to b49b49e artifacts as well as the earlier matching measurements. The final GDS byte hash is **`2a3dd3d5d08d914815cfe7541c256b74315c2f4e143c93d63ec99b104e634aff`**; use this hash for this run, not the earlier bd1876b GDS hash.
+
+`info.yaml`, all three RTL files and `src/config.json` match the downloaded submission byte-for-byte. Flow: LibreLane 3.0.14, SKY130A/open_pdks `8afc8346a57fe1ab7934ba5a6056ea8b43078e71`. Full downloaded files are retained in the parent workspace's ignored `h2/build/physical_b49b49e/`; compact reports, proof models and manifests are committed with this report. RTL, interface, clock and tile settings were not changed during this evidence update.
 
 | Evidence | Coverage | Result |
 |---|---|---|
@@ -14,9 +33,9 @@
 | Final DOT burn JSON | Original L1 case_dot(20), fresh DOT RNG seed 21; 1,000,016 samples, 32,000,512 output bits | Zero mismatches |
 | X Layer DOT #3@2.245 | Same 86 vectors, both canonical eval and step; exact netlist bytes | Pass at block 72440910 |
 | DOT L2 | Upstream L2 contains FMUL_BF16 only | Not applicable |
-| Yosys/ABC core CEC | All inputs; actual-output flip negative controls | bd1876b: #279 pass in 0.032 s; DOT pass in 0.716 s |
-| Wrapper formal | 358 state bits, both reset base cases | Reset pass; CEC blocked by internal-X export guard; fix pending |
-| SKY130 physical flow | Official ttsky26d GDS / 15 prechecks / 128 port transactions | bd1876b: all three design jobs pass |
+| Yosys/ABC core CEC | All inputs; actual-output flip negative controls | b49b49e: #279 pass in 0.032 s; DOT pass in 0.716 s |
+| Wrapper formal | 358 state bits, both reset base cases | b49b49e: reset/definedness pass; full CEC 0.766 s; negative control rejected |
+| SKY130 physical flow | Official ttsky26d GDS / 15 prechecks / 128 port transactions | b49b49e: all four physical jobs pass |
 
 Raw source SHA-256 values are `f35baa03be7f9eefba33d778e0ff5b6e1430ccbb7b5b4a9daa81695b186c26c0` (#279, 21 NAND) and `b1507f55d3bd80bbc55f9e06dc656d81e049138827c97ec7fe640d7bfa2ce0b7` (DOT32_T, 3,829 NAND). Both contain zero latches. The wrapper adds 358 declared state bits. The core counts describe the pre-synthesis source records, not physical standard-cell counts.
 
@@ -28,7 +47,7 @@ Raw source SHA-256 values are `f35baa03be7f9eefba33d778e0ff5b6e1430ccbb7b5b4a9da
 
 本地逐位证据、负对照和文件哈希均已保留。#279 已核对原始链上网表及同批 eval/step。DOT 已发布为 #3@2.245，独立 86 组链上 eval/step 逐位通过；最终 JSON 对 L1 全百万向量通过，但这不等于全部 2^320 输入的形式证明；现有 L2 没有 DOT 项目。泛用综合的 CEC 也不等于最终布线网表的形式签核，后者另有官方 GL 有限向量测试。
 
-The [official schedule](https://tinytapeout.com/chips/) lists **TTSKY26d closing 2026-11-30**, estimated shipping **2027-06-09**. The [calculator](https://app.tinytapeout.com/calculator?shuttle=chipfoundry&tiles=2&pcbs=1) and its [public pricing module](https://app.tinytapeout.com/_build/assets/invoice-WoZjomWD.js), checked 2026-10-05, give €70/tile. Two tiles cost €140; one standard €300 kit plus €15 shipping makes €455, or €255 with the limited €100 individual kit. Discount eligibility, inventory, taxes and final checkout are unconfirmed. [Pricing snapshot](verification/evidence/pricing.json). No order has been submitted.
+The [official schedule](https://tinytapeout.com/chips/) lists TTSKY26d closing 2026-11-30, estimated shipping 2027-06-09. Four tiles cost EUR280; a standard kit and listed shipping bring the budget to EUR595, or EUR395 if the limited individual discount applies. See [SUBMISSION.md](SUBMISSION.md) for current assumptions, exact configuration and the user-approved submission procedure. No order has been submitted.
 
 当前候选四 tile €280；加普通开发板与列明的运费 €595，有个人优惠时 €395，相比原两 tile 均增加 €140。最终费用取决于实际尺寸、优惠与结算；本项目未付费提交。
 
@@ -46,11 +65,11 @@ The 2x2 estimate uses the [official DEF](https://github.com/TinyTapeout/tt-suppo
 
 选型：先用 2x2 验证能否完整布通，保持源网表与接口不变。1x2 当前连 100% 都超过，60% 目标所需缩减约 44%；默认已做 AREA_0，不能把调高密度当作修复。2x2 的约 50.6% 仅为面积估算，必须通过实际 GDS、precheck、GL 与时序检查。4 tile 的额外 €140 已交用户决定，CI 配置不代表下单。
 
-The [failed formal run](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37326566770) reported all DOT `dout` bits successful before stalling on internal wire obligations. Those successes depended on unproven cut points, so DOT was unproven in that revision. The replacement uses ABC CEC over ports and, for the complete wrapper, all 358 next-state bits plus clock outputs, with separate reset proofs. It does not black-box the arithmetic cores. Independent matrix jobs have explicit process limits and reject a flipped bit in each actual synthesized design. [Proof method and limits](verification/FORMAL.md). The later core proofs are recorded below; wrapper CEC remains pending.
+The [failed formal run](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37326566770) reported all DOT `dout` bits successful before stalling on internal wire obligations. Those successes depended on unproven cut points, so DOT was unproven in that revision. The replacement uses ABC CEC over ports and, for the complete wrapper, all 358 next-state bits plus clock outputs, with separate reset proofs. It does not black-box the arithmetic cores. Independent matrix jobs have explicit process limits and reject a flipped bit in each actual synthesized design. [Proof method and limits](verification/FORMAL.md). The later core proofs are recorded below; the complete wrapper CEC is now recorded in b49b49e above.
 
 ## bd1876b measured results / 第二轮实测
 
-The [formal run](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37331447451) establishes full generic synthesis equivalence for both cores. The previous DOT timeout is resolved: its CEC took 0.716 s and its output-flip counterexample 0.064 s. [Core receipts and logs](verification/evidence/formal_bd1876b/). The wrapper's two reset checks passed, but 76 source-side mux branches contained X. Its prepared fix first proves that all **385 external/next-state/clock output bits are defined for arbitrary binary inputs and state**, then permits internal X normalization for ABC. The exported-BLIF guard is retained, with masked-X and observable-X controls. Wrapper CEC remains unproved until the new Actions job passes.
+The [formal run](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37331447451) establishes full generic synthesis equivalence for both cores. The previous DOT timeout is resolved: its CEC took 0.716 s and its output-flip counterexample 0.064 s. [Core receipts and logs](verification/evidence/formal_bd1876b/). The wrapper's two reset checks passed, but 76 source-side mux branches contained X. Its prepared fix first proves that all **385 external/next-state/clock output bits are defined for arbitrary binary inputs and state**, then permits internal X normalization for ABC. The exported-BLIF guard is retained, with masked-X and observable-X controls. This historical gap is closed by b49b49e above.
 
 The [physical run](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37331447516) passed GDS, all 15 Tiny Tapeout prechecks and the port-level gate simulation (128 transactions inside one cocotb test). Artifact source/config hashes match the current design. [Raw metrics, precheck, gate-test XML and artifact manifest](verification/evidence/physical_bd1876b/).
 
@@ -84,11 +103,11 @@ The standalone public replay script was also run against block 72440910: all 86 
 
 ## Later physical-workflow receipt / 后续物理流程回执
 
-[Run 37334330241](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37334330241), at the same bd1876b commit, reports **gds, precheck, gl_test and viewer all successful**. [Read-only status receipt](verification/evidence/gds_rerun_bd1876b.json). The measured area/timing table above remains sourced from run 37331447516 artifacts. This update does not establish the still-pending wrapper CEC or a paid submission.
+[Run 37334330241](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37334330241), at the same bd1876b commit, reports **gds, precheck, gl_test and viewer all successful**. [Read-only status receipt](verification/evidence/gds_rerun_bd1876b.json). The measured area/timing table above remains sourced from run 37331447516 artifacts. This historical update predates the final b49b49e wrapper proof; no paid submission has occurred.
 
-同提交的后续物理工作流四项均成功，含可选 viewer；不据此推断设置由谁改变。上文面积/时序仍绑定初次成功物理 job 的原始 artifact；wrapper 新证明仍待 Actions。
+同提交的后续物理工作流四项均成功，含可选 viewer；不据此推断设置由谁改变。上文面积/时序仍绑定初次成功物理 job 的原始 artifact；wrapper 最终证明见 b49b49e 小节。
 
 
 ## 8e139cf control-verdict fix
 
-[Formal run 37353300366](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37353300366) passed both cores again. The leaking-X fixture produced `ERROR: Called with -verify and proof did fail!`; the old parser incorrectly also required `model found: FAIL!`. The replacement recognizes explicit counterexamples with exit code 1 and rejects timeouts, signals, generic errors and contradictory verdicts. Four local parser tests include the actual runner log. The SAT query and all 385 output/state/clock obligations are unchanged; full wrapper proof remains pending. [Run receipts](verification/evidence/ci_8e139cf.json). [GDS run 37353300337](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37353300337) passes gds/precheck/gl_test/viewer; its status does not replace the earlier measured area/timing artifacts.
+[Formal run 37353300366](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37353300366) passed both cores again. The leaking-X fixture produced `ERROR: Called with -verify and proof did fail!`; the old parser incorrectly also required `model found: FAIL!`. The replacement recognizes explicit counterexamples with exit code 1 and rejects timeouts, signals, generic errors and contradictory verdicts. Four local parser tests include the actual runner log. The SAT query and all 385 output/state/clock obligations are unchanged; the full wrapper proof subsequently passed in b49b49e above. [Run receipts](verification/evidence/ci_8e139cf.json). [GDS run 37353300337](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37353300337) passes gds/precheck/gl_test/viewer; its status does not replace the earlier measured area/timing artifacts.

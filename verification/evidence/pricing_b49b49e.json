@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-05T19:13:43.333668+00:00",
+  "calculator_url": "https://app.tinytapeout.com/calculator?shuttle=chipfoundry&tiles=4&pcbs=1",
+  "source_url": "https://app.tinytapeout.com/_build/assets/invoice-WoZjomWD.js",
+  "source_sha256": "fd9e3eabbe907d01998ea29e2ee4da5e935f93ab93137081d3dc8dd87fe848bb",
+  "method": "Read the public calculator pricing constants and invoice formula; no order submitted",
+  "currency": "EUR",
+  "sky130_tile": 70,
+  "pcb_standard": 300,
+  "pcb_individual_discounted": 100,
+  "shipping_per_pcb": 15,
+  "limits": "Budget, not an order: discount eligibility/stock and checkout taxes/final quote require user confirmation. 2x2 flow passed b49b49e. Official shuttle list shows launch TBD; actual project acceptance must be checked when submitting.",
+  "shuttle_url": "https://tinytapeout.com/chips/",
+  "shuttle": "TTSKY26d",
+  "closes": "2026-11-30",
+  "estimated_shipping": "2027-06-09",
+  "tiles": 4,
+  "four_tiles_only": 280,
+  "four_tiles_one_standard_pcb_shipping": 595,
+  "four_tiles_one_discounted_pcb_shipping": 395,
+  "delta_vs_two_tiles": 140
+}

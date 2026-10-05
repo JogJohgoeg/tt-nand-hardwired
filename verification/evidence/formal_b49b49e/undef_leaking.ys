@@ -1,0 +1,6 @@
+read_verilog build/formal/undef_controls.v
+hierarchy -top leaking
+proc
+techmap
+opt_clean
+sat -verify -enable_undef -set-def-inputs -set-any-undef good,bad -prove 1'b0 1'b1 -timeout 60

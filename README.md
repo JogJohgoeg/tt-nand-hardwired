@@ -2,7 +2,7 @@
 
 A SKY130 Tiny Tapeout candidate containing circuit #279 (21 NANDs) and DOT32_T (3,829 NANDs), generated mechanically from pinned TapeOut gate records. DOT weights are runtime inputs; this is a first arithmetic demonstrator, not a complete hardwired LLM.
 
-The [datasheet](docs/info.md) specifies the serial protocol. [Verification evidence](verification/evidence/) records local tests and both cores’ canonical chain checks. Actions **bd1876b** passed both core CEC jobs and **2x2 GDS, precheck and gate simulation**; wrapper formal remains pending. The [report](REPORT.md) includes measured area/timing, the internal-X proof fix and the **+€140 tile-fee** comparison.
+The [datasheet](docs/info.md) specifies the serial protocol. [Verification evidence](verification/evidence/) records local tests and both cores’ canonical chain checks. Actions **b49b49e** passed **all four workflows**, including both core and full-wrapper formal proofs, **2x2 GDS, precheck, gate simulation and viewer**. [Formal run 37359551360](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359551360), [GDS run 37359561071](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359561071). The [report](REPORT.md) records artifact-bound area/timing and proof limits. The [submission checklist](SUBMISSION.md) fixes info.yaml, four-tile fees and portal steps; paid submission awaits the user.
 
 ```sh
 python verification/gen_verilog.py --check

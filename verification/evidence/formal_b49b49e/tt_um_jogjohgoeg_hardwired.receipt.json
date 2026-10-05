@@ -1,0 +1,52 @@
+{
+  "scope": "source vs generic Yosys/ABC synthesis; all ports and all next-state bits",
+  "module": "tt_um_jogjohgoeg_hardwired",
+  "models": {
+    "gold": {
+      "state_bits": 358,
+      "inputs": 377,
+      "outputs": 385
+    },
+    "gate": {
+      "state_bits": 358,
+      "inputs": 377,
+      "outputs": 385
+    }
+  },
+  "proof": {
+    "verdict": "equivalent",
+    "seconds": 0.766
+  },
+  "negative_control": {
+    "verdict": "different",
+    "seconds": 0.064
+  },
+  "definedness": "all 385 outputs defined on both sides before setundef -zero",
+  "definedness_controls": {
+    "masked": {
+      "returncode": 0,
+      "verdict": "proved",
+      "log_sha256": "b603cf881edfca05f9922dc8e3d3d7fd0857f9ee2a779f568fee712ab50a88f6"
+    },
+    "leaking": {
+      "returncode": 1,
+      "verdict": "counterexample",
+      "log_sha256": "eff53c6f8b40bcf6de7e4da3abb5695b5619c01dbc233303a1b1b0ed64d8d451"
+    }
+  },
+  "reset_base_case": "both sides proved zero after one reset edge",
+  "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+  "abc_executable": "/usr/bin/yosys-abc",
+  "files": {
+    "src/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "src/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+    "src/project.v": "27e8879437c6e7cd2bbde5327d12afa3e59b7d2f261a46e87374fbaff27c6594",
+    "verification/formal.py": "6d94eeba0d641bf8f292877e5c95f0594e4c643f5afc5d75a70734cac9bb2bc6",
+    "build/formal/tt_um_jogjohgoeg_hardwired.ys": "327d11bec40dde70f2ebc5e782194e1dc2e2ea26a752b1efd44357ec1c6643fe",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gold.blif": "a3eee1a4a194ab8ed4732b9ee24e406971c3ce40eae1a936c40c4d06110501fc",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gate.blif": "b538a8e122bc55cdf70aabb09f9b823989c2d45a25e94caffc01b8e66ff5966e",
+    "build/formal/tt_um_jogjohgoeg_hardwired.synth.v": "0ffc187960f2ab07a2e132c46ac597e4c88fa1a9089ab27c5f10ec7a6523e68f",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gold.undef.json": "b15fd11058ea274c4d12e99b418cbed4fde5764004e9b10c9937e5f978c31ef1",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gate.undef.json": "bdb85950e0f71e847fe00096251249409e67cda5fb1e2044b022c614eeae64a8"
+  }
+}

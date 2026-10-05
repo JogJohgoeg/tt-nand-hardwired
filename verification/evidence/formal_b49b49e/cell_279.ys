@@ -1,0 +1,26 @@
+read_verilog src/cell_279.v
+hierarchy -check -top cell_279
+proc
+flatten
+opt_clean
+check -assert
+design -save source
+design -load source
+techmap
+opt -fast
+dffunmap
+opt_clean
+check -assert
+write_json build/formal/cell_279.gold.state.json
+write_json build/formal/cell_279.gold.json
+write_blif build/formal/cell_279.gold.blif
+design -load source
+synth -top cell_279 -flatten
+check -assert
+write_verilog -noattr build/formal/cell_279.synth.v
+dffunmap
+opt_clean
+check -assert
+write_json build/formal/cell_279.gate.state.json
+write_json build/formal/cell_279.gate.json
+write_blif build/formal/cell_279.gate.blif

@@ -1,0 +1,456 @@
+{
+  "checked_at": "2026-10-05T19:13:43.334946+00:00",
+  "commit": "b49b49e4f0abd0521220d4f39227774d748c9d79",
+  "status": "verification_complete_paid_submission_pending",
+  "runs": {
+    "formal": {
+      "conclusion": "success",
+      "createdAt": "2026-10-05T18:54:59Z",
+      "databaseId": 37359551360,
+      "headSha": "b49b49e4f0abd0521220d4f39227774d748c9d79",
+      "status": "completed",
+      "updatedAt": "2026-10-05T18:55:57Z",
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359551360",
+      "jobs": [
+        {
+          "name": "equivalence (tt_um_jogjohgoeg_hardwired)",
+          "databaseId": 111930415272,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359551360/job/111930415272"
+        },
+        {
+          "name": "equivalence (dot32_t)",
+          "databaseId": 111930415540,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359551360/job/111930415540"
+        },
+        {
+          "name": "equivalence (cell_279)",
+          "databaseId": 111930415664,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359551360/job/111930415664"
+        }
+      ]
+    },
+    "gds": {
+      "conclusion": "success",
+      "createdAt": "2026-10-05T18:55:03Z",
+      "databaseId": 37359561071,
+      "headSha": "b49b49e4f0abd0521220d4f39227774d748c9d79",
+      "status": "completed",
+      "updatedAt": "2026-10-05T19:06:22Z",
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359561071",
+      "jobs": [
+        {
+          "name": "gds",
+          "databaseId": 111930449177,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359561071/job/111930449177"
+        },
+        {
+          "name": "gl_test",
+          "databaseId": 111933850174,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359561071/job/111933850174"
+        },
+        {
+          "name": "precheck",
+          "databaseId": 111933850209,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359561071/job/111933850209"
+        },
+        {
+          "name": "viewer",
+          "databaseId": 111933850390,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359561071/job/111933850390"
+        }
+      ]
+    },
+    "test": {
+      "conclusion": "success",
+      "createdAt": "2026-10-05T18:53:57Z",
+      "databaseId": 37359423132,
+      "headSha": "b49b49e4f0abd0521220d4f39227774d748c9d79",
+      "status": "completed",
+      "updatedAt": "2026-10-05T18:54:42Z",
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359423132",
+      "jobs": [
+        {
+          "name": "test",
+          "databaseId": 111929981779,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359423132/job/111929981779"
+        }
+      ]
+    },
+    "docs": {
+      "conclusion": "success",
+      "createdAt": "2026-10-05T18:53:57Z",
+      "databaseId": 37359423101,
+      "headSha": "b49b49e4f0abd0521220d4f39227774d748c9d79",
+      "status": "completed",
+      "updatedAt": "2026-10-05T18:54:49Z",
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359423101",
+      "jobs": [
+        {
+          "name": "docs",
+          "databaseId": 111929981768,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359423101/job/111929981768"
+        }
+      ]
+    }
+  },
+  "formal": {
+    "cell_279": {
+      "scope": "source vs generic Yosys/ABC synthesis; all ports and all next-state bits",
+      "module": "cell_279",
+      "models": {
+        "gold": {
+          "state_bits": 0,
+          "inputs": 15,
+          "outputs": 2
+        },
+        "gate": {
+          "state_bits": 0,
+          "inputs": 15,
+          "outputs": 2
+        }
+      },
+      "proof": {
+        "verdict": "equivalent",
+        "seconds": 0.032
+      },
+      "negative_control": {
+        "verdict": "different",
+        "seconds": 0.032
+      },
+      "definedness": "strict BLIF check",
+      "definedness_controls": null,
+      "reset_base_case": null,
+      "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+      "abc_executable": "/usr/bin/yosys-abc"
+    },
+    "dot32_t": {
+      "scope": "source vs generic Yosys/ABC synthesis; all ports and all next-state bits",
+      "module": "dot32_t",
+      "models": {
+        "gold": {
+          "state_bits": 0,
+          "inputs": 320,
+          "outputs": 32
+        },
+        "gate": {
+          "state_bits": 0,
+          "inputs": 320,
+          "outputs": 32
+        }
+      },
+      "proof": {
+        "verdict": "equivalent",
+        "seconds": 0.716
+      },
+      "negative_control": {
+        "verdict": "different",
+        "seconds": 0.064
+      },
+      "definedness": "strict BLIF check",
+      "definedness_controls": null,
+      "reset_base_case": null,
+      "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+      "abc_executable": "/usr/bin/yosys-abc"
+    },
+    "tt_um_jogjohgoeg_hardwired": {
+      "scope": "source vs generic Yosys/ABC synthesis; all ports and all next-state bits",
+      "module": "tt_um_jogjohgoeg_hardwired",
+      "models": {
+        "gold": {
+          "state_bits": 358,
+          "inputs": 377,
+          "outputs": 385
+        },
+        "gate": {
+          "state_bits": 358,
+          "inputs": 377,
+          "outputs": 385
+        }
+      },
+      "proof": {
+        "verdict": "equivalent",
+        "seconds": 0.766
+      },
+      "negative_control": {
+        "verdict": "different",
+        "seconds": 0.064
+      },
+      "definedness": "all 385 outputs defined on both sides before setundef -zero",
+      "definedness_controls": {
+        "masked": {
+          "returncode": 0,
+          "verdict": "proved",
+          "log_sha256": "b603cf881edfca05f9922dc8e3d3d7fd0857f9ee2a779f568fee712ab50a88f6"
+        },
+        "leaking": {
+          "returncode": 1,
+          "verdict": "counterexample",
+          "log_sha256": "eff53c6f8b40bcf6de7e4da3abb5695b5619c01dbc233303a1b1b0ed64d8d451"
+        }
+      },
+      "reset_base_case": "both sides proved zero after one reset edge",
+      "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+      "abc_executable": "/usr/bin/yosys-abc"
+    }
+  },
+  "formal_receipt_hashes_verified": {
+    "src/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "src/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+    "src/project.v": "27e8879437c6e7cd2bbde5327d12afa3e59b7d2f261a46e87374fbaff27c6594",
+    "verification/formal.py": "6d94eeba0d641bf8f292877e5c95f0594e4c643f5afc5d75a70734cac9bb2bc6",
+    "build/formal/cell_279.ys": "86f7ef89e97246999b79cc6ca56450e1b67f11e3793fbbc0edb890ca84f07c28",
+    "build/formal/cell_279.gold.blif": "39423a77d0515e6bd82f19cbc44bbde28fef0f7df2aba300d9c342606c508a03",
+    "build/formal/cell_279.gate.blif": "0dc52eb9dcc04680b6380064a22e5c0f5f0c4976f86affdf8aba8f36c07cc979",
+    "build/formal/cell_279.synth.v": "cf2312ce07381b0739a65c35f6cd246d3498d605cda8d7732971f4e8d8c2c382",
+    "build/formal/dot32_t.ys": "e6ca795288c58bb0ec25210d938e68adc9758227dee92ec0db5f7c3a8f65d2db",
+    "build/formal/dot32_t.gold.blif": "658747b0fc0fdeb01cf5d7d76c223ddf19969fca2d313a86cfc568e4e8ff2625",
+    "build/formal/dot32_t.gate.blif": "879a357f9eb4f4ae459b7e16b3c24796b041db7bfedb5d48c7556a2c05dc8d36",
+    "build/formal/dot32_t.synth.v": "a49e8d980d098279c44a62a9f016c7d3ca6c1c658191a6201395e1932cc28ae7",
+    "build/formal/tt_um_jogjohgoeg_hardwired.ys": "327d11bec40dde70f2ebc5e782194e1dc2e2ea26a752b1efd44357ec1c6643fe",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gold.blif": "a3eee1a4a194ab8ed4732b9ee24e406971c3ce40eae1a936c40c4d06110501fc",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gate.blif": "b538a8e122bc55cdf70aabb09f9b823989c2d45a25e94caffc01b8e66ff5966e",
+    "build/formal/tt_um_jogjohgoeg_hardwired.synth.v": "0ffc187960f2ab07a2e132c46ac597e4c88fa1a9089ab27c5f10ec7a6523e68f",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gold.undef.json": "b15fd11058ea274c4d12e99b418cbed4fde5764004e9b10c9937e5f978c31ef1",
+    "build/formal/tt_um_jogjohgoeg_hardwired.gate.undef.json": "bdb85950e0f71e847fe00096251249409e67cda5fb1e2044b022c614eeae64a8"
+  },
+  "physical": {
+    "metrics": {
+      "design__core__area": "72564.6",
+      "design__instance__area__stdcell": "39784.4",
+      "design__instance__utilization__stdcell": "0.548262",
+      "timing__setup__ws": "58.28377589969978",
+      "timing__hold__ws": "0.10779588637932835",
+      "timing__setup__tns": "0.0",
+      "timing__hold__tns": "0.0",
+      "route__drc_errors": "0",
+      "magic__drc_error__count": "0",
+      "design__lvs_error__count": "0",
+      "design__max_cap_violation__count": "0",
+      "design__max_slew_violation__count": "226"
+    },
+    "gds_sha256": "2a3dd3d5d08d914815cfe7541c256b74315c2f4e143c93d63ec99b104e634aff",
+    "prechecks_passed": 15,
+    "gatelevel_testcases_passed": 1,
+    "gatelevel_transactions": 128,
+    "source_files_match_local": {
+      "info.yaml": "e42b284a6ba5437fc165b698e9135c0492c57594b8db2daebaa081ffc0d6de3c",
+      "src/project.v": "27e8879437c6e7cd2bbde5327d12afa3e59b7d2f261a46e87374fbaff27c6594",
+      "src/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+      "src/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+      "src/config.json": "5fb65a7f951e1e07ab94d539d616a1a0f0f078d31b995cf6079693722af98e21"
+    },
+    "artifact_files_hashed": 1090,
+    "local_full_archive": "h2/build/physical_b49b49e/"
+  },
+  "artifact_metadata": {
+    "formal": {
+      "total_count": 3,
+      "artifacts": [
+        {
+          "id": 11366267174,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2NjI2NzE3NA==",
+          "name": "formal-evidence-dot32_t",
+          "size_in_bytes": 614894,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366267174",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366267174/zip",
+          "expired": false,
+          "digest": "sha256:d9112591c071e865f5d88b9c062a895ee645d7da806e6836dec93ad7fa6e6350",
+          "created_at": "2026-10-05T18:55:37Z",
+          "updated_at": "2026-10-05T18:55:37Z",
+          "expires_at": "2027-01-03T18:54:59Z",
+          "workflow_run": {
+            "id": 37359551360,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        },
+        {
+          "id": 11365564226,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2NTU2NDIyNg==",
+          "name": "formal-evidence-tt_um_jogjohgoeg_hardwired",
+          "size_in_bytes": 1067553,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11365564226",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11365564226/zip",
+          "expired": false,
+          "digest": "sha256:81c2d791fd777a2f33f07958431979d77fcc299ccc9f5116ea778c1065e8350b",
+          "created_at": "2026-10-05T18:55:54Z",
+          "updated_at": "2026-10-05T18:55:54Z",
+          "expires_at": "2027-01-03T18:54:59Z",
+          "workflow_run": {
+            "id": 37359551360,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        },
+        {
+          "id": 11364829992,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2NDgyOTk5Mg==",
+          "name": "formal-evidence-cell_279",
+          "size_in_bytes": 12026,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11364829992",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11364829992/zip",
+          "expired": false,
+          "digest": "sha256:867ffc07f509f7a6b2d43ccabdd49d56c708942a92a1984a09e8ebda756f172d",
+          "created_at": "2026-10-05T18:55:25Z",
+          "updated_at": "2026-10-05T18:55:25Z",
+          "expires_at": "2027-01-03T18:54:59Z",
+          "workflow_run": {
+            "id": 37359551360,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        }
+      ]
+    },
+    "gds": {
+      "total_count": 6,
+      "artifacts": [
+        {
+          "id": 11366950911,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2Njk1MDkxMQ==",
+          "name": "gatelevel_test_results",
+          "size_in_bytes": 491,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366950911",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366950911/zip",
+          "expired": false,
+          "digest": "sha256:ad646f760f2f5d9bd1179bd1d709e42321f7813ee61df7e816aa2f106da88512",
+          "created_at": "2026-10-05T19:04:26Z",
+          "updated_at": "2026-10-05T19:04:26Z",
+          "expires_at": "2027-01-03T18:55:04Z",
+          "workflow_run": {
+            "id": 37359561071,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        },
+        {
+          "id": 11366895592,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2Njg5NTU5Mg==",
+          "name": "github-pages",
+          "size_in_bytes": 2959444,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366895592",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366895592/zip",
+          "expired": false,
+          "digest": "sha256:bf076cb14d6b4ea930b6875341b1a07d2eb05b39ca3e377732400d6649008232",
+          "created_at": "2026-10-05T19:03:23Z",
+          "updated_at": "2026-10-05T19:03:23Z",
+          "expires_at": "2026-10-06T19:03:22Z",
+          "workflow_run": {
+            "id": 37359561071,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        },
+        {
+          "id": 11366322783,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2NjMyMjc4Mw==",
+          "name": "tt_submission",
+          "size_in_bytes": 4461474,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366322783",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366322783/zip",
+          "expired": false,
+          "digest": "sha256:717e5d1d06768f88390c7246aa7616c90154e5890d25a557cee2bcb1695e685e",
+          "created_at": "2026-10-05T19:02:55Z",
+          "updated_at": "2026-10-05T19:02:55Z",
+          "expires_at": "2027-01-03T18:55:04Z",
+          "workflow_run": {
+            "id": 37359561071,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        },
+        {
+          "id": 11366148330,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2NjE0ODMzMA==",
+          "name": "GDS_logs",
+          "size_in_bytes": 52253933,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366148330",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11366148330/zip",
+          "expired": false,
+          "digest": "sha256:29062b9e9f3ab8a560654c863038da74c7df34f285a3daf856cac8eeba4a91d3",
+          "created_at": "2026-10-05T19:02:53Z",
+          "updated_at": "2026-10-05T19:02:53Z",
+          "expires_at": "2027-01-03T18:55:04Z",
+          "workflow_run": {
+            "id": 37359561071,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        },
+        {
+          "id": 11365929043,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2NTkyOTA0Mw==",
+          "name": "gds_render",
+          "size_in_bytes": 1295758,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11365929043",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11365929043/zip",
+          "expired": false,
+          "digest": "sha256:bad9e2f84ab67e1b82c2fbcc4f23286fa8a411f222fbdb45ad7602fa8bea747e",
+          "created_at": "2026-10-05T19:03:07Z",
+          "updated_at": "2026-10-05T19:03:07Z",
+          "expires_at": "2027-01-03T18:55:04Z",
+          "workflow_run": {
+            "id": 37359561071,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        },
+        {
+          "id": 11365774319,
+          "node_id": "MDg6QXJ0aWZhY3QxMTM2NTc3NDMxOQ==",
+          "name": "precheck_reports",
+          "size_in_bytes": 7338,
+          "url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11365774319",
+          "archive_download_url": "https://api.github.com/repos/JogJohgoeg/tt-nand-hardwired/actions/artifacts/11365774319/zip",
+          "expired": false,
+          "digest": "sha256:15db4c842216039f3f8a8fa973801c0df89700bbc599a1cd6503bdbadb5c8aff",
+          "created_at": "2026-10-05T19:06:19Z",
+          "updated_at": "2026-10-05T19:06:19Z",
+          "expires_at": "2027-01-03T18:55:04Z",
+          "workflow_run": {
+            "id": 37359561071,
+            "repository_id": 1405835428,
+            "head_repository_id": 1405835428,
+            "head_branch": "main",
+            "head_sha": "b49b49e4f0abd0521220d4f39227774d748c9d79"
+          }
+        }
+      ]
+    }
+  },
+  "paid_submission": "not performed; user decision"
+}

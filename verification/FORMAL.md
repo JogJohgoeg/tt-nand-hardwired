@@ -1,5 +1,13 @@
 # Synthesis equivalence
 
+**Final result: b49b49e4f0abd0521220d4f39227774d748c9d79 passes all three
+formal jobs in [run 37359551360](https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37359551360).**
+CEC: cell_279 0.032 s, DOT32_T 0.716 s, full wrapper 0.766 s. All actual-output
+negative controls are rejected. The wrapper also passes both reset and both
+definedness obligations; masked-X is proved and leaking-X yields a counterexample.
+[Raw receipts, logs and compressed proof models](evidence/formal_b49b49e/manifest.json)
+bind all 46 artifact files. The earlier failures below document the fixes.
+
 The first Actions run (`e50f2e1`) proved cell_279. For DOT32_T, `equiv_simple`
 printed success for all 32 output bits but then stalled on an internal `w41xx`
 correspondence until the 900-second process limit. Output successes depended on
@@ -39,8 +47,7 @@ stream. The revised classifier accepts either explicit counterexample format
 with exit code 1; it rejects timeout, signals, generic errors, missing or
 contradictory verdicts. Its regression includes the actual failed-run log.
 The SAT query, observable bits, binary-input conditions and BLIF guard are
-unchanged. The wrapper proof itself has still not run past the control check
-in a successful CI job; another Actions result is required.
+unchanged. The complete wrapper proof subsequently passed in b49b49e, as recorded above.
 
 For the wrapper, both full cores remain in the flattened design. After unmapping
 synchronous reset and enable into multiplexers, the script checks that exactly
@@ -69,9 +76,8 @@ script, synthesized Verilog and both BLIFs to SHA-256 values.
 This establishes generic Yosys/ABC synthesis equivalence when the job passes.
 It does not establish formal equivalence of the final routed SKY130 netlist;
 the official GDS flow and its gate-level port regression remain separate checks.
-The remaining wrapper definedness fix is prepared locally; only an actual
-Actions result counts as a formal pass. No local synthesis or solver run is
-permitted for this project.
+The wrapper definedness fix is verified by the actual b49b49e Actions result.
+No local synthesis or solver run is permitted for this project.
 
 ```sh
 # Local Python only:
@@ -91,7 +97,7 @@ and [ABC CEC/verdict implementation](https://github.com/berkeley-abc/abc/blob/ma
 中文：新方法比较两颗核心的全部端口，以及完整顶层的全部输出和 358 个下一状态位。
 只有状态寄存器作为归纳边界，算术核心没有黑盒化。复位基例与任意状态下的一步转换
 共同覆盖复位后的任意长执行。每项有时限，并用实际综合输出翻位作为负对照。
-本机只生成脚本和测试解析器；Actions 通过前不宣称形式证明成功。
+本机只生成脚本和测试解析器；最终 b49b49e 的三项 Actions 证明已全部通过。
 
 bd1876b 已证两颗核心。Wrapper 保留的 76 个内部 mux 的 X 分支需要额外证明：
 先证明任意二值输入和状态下，全部 385 位输出都确定，再把内部 X 转为二值。

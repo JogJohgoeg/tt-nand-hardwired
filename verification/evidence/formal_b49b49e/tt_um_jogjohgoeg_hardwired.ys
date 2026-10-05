@@ -1,0 +1,50 @@
+read_verilog src/project.v src/cell_279.v src/dot32_t.v
+hierarchy -check -top tt_um_jogjohgoeg_hardwired
+proc
+flatten
+opt_clean
+check -assert
+design -save source
+design -load source
+techmap
+opt -fast
+dffunmap
+opt_clean
+check -assert
+write_json build/formal/tt_um_jogjohgoeg_hardwired.gold.state.json
+select -set state w:in_sr w:out_sr w:out_count
+rename -hide w:* @state %d
+select *
+expose -dff -evert-dff
+opt_clean
+check -assert
+write_json build/formal/tt_um_jogjohgoeg_hardwired.gold.undef.json
+sat -verify -enable_undef -set-def-inputs -set-any-undef uo_out,uio_out,uio_oe,in_sr.d,in_sr.c,out_sr.d,out_sr.c,out_count.d,out_count.c -prove 1'b0 1'b1 -timeout 60
+sat -verify -set-def-inputs -set rst_n 0 -prove in_sr.d 0 -prove out_sr.d 0 -prove out_count.d 0 -timeout 60
+setundef -zero
+opt_clean
+check -assert
+write_json build/formal/tt_um_jogjohgoeg_hardwired.gold.json
+write_blif build/formal/tt_um_jogjohgoeg_hardwired.gold.blif
+design -load source
+synth -top tt_um_jogjohgoeg_hardwired -flatten
+check -assert
+write_verilog -noattr build/formal/tt_um_jogjohgoeg_hardwired.synth.v
+dffunmap
+opt_clean
+check -assert
+write_json build/formal/tt_um_jogjohgoeg_hardwired.gate.state.json
+select -set state w:in_sr w:out_sr w:out_count
+rename -hide w:* @state %d
+select *
+expose -dff -evert-dff
+opt_clean
+check -assert
+write_json build/formal/tt_um_jogjohgoeg_hardwired.gate.undef.json
+sat -verify -enable_undef -set-def-inputs -set-any-undef uo_out,uio_out,uio_oe,in_sr.d,in_sr.c,out_sr.d,out_sr.c,out_count.d,out_count.c -prove 1'b0 1'b1 -timeout 60
+sat -verify -set-def-inputs -set rst_n 0 -prove in_sr.d 0 -prove out_sr.d 0 -prove out_count.d 0 -timeout 60
+setundef -zero
+opt_clean
+check -assert
+write_json build/formal/tt_um_jogjohgoeg_hardwired.gate.json
+write_blif build/formal/tt_um_jogjohgoeg_hardwired.gate.blif

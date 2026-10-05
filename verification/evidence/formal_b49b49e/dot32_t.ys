@@ -1,0 +1,26 @@
+read_verilog src/dot32_t.v
+hierarchy -check -top dot32_t
+proc
+flatten
+opt_clean
+check -assert
+design -save source
+design -load source
+techmap
+opt -fast
+dffunmap
+opt_clean
+check -assert
+write_json build/formal/dot32_t.gold.state.json
+write_json build/formal/dot32_t.gold.json
+write_blif build/formal/dot32_t.gold.blif
+design -load source
+synth -top dot32_t -flatten
+check -assert
+write_verilog -noattr build/formal/dot32_t.synth.v
+dffunmap
+opt_clean
+check -assert
+write_json build/formal/dot32_t.gate.state.json
+write_json build/formal/dot32_t.gate.json
+write_blif build/formal/dot32_t.gate.blif

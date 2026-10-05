@@ -1,0 +1,39 @@
+{
+  "scope": "source vs generic Yosys/ABC synthesis; all ports and all next-state bits",
+  "module": "cell_279",
+  "models": {
+    "gold": {
+      "state_bits": 0,
+      "inputs": 15,
+      "outputs": 2
+    },
+    "gate": {
+      "state_bits": 0,
+      "inputs": 15,
+      "outputs": 2
+    }
+  },
+  "proof": {
+    "verdict": "equivalent",
+    "seconds": 0.032
+  },
+  "negative_control": {
+    "verdict": "different",
+    "seconds": 0.032
+  },
+  "definedness": "strict BLIF check",
+  "definedness_controls": null,
+  "reset_base_case": null,
+  "yosys": "Yosys 0.33 (git sha1 2584903a060)",
+  "abc_executable": "/usr/bin/yosys-abc",
+  "files": {
+    "src/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "src/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+    "src/project.v": "27e8879437c6e7cd2bbde5327d12afa3e59b7d2f261a46e87374fbaff27c6594",
+    "verification/formal.py": "6d94eeba0d641bf8f292877e5c95f0594e4c643f5afc5d75a70734cac9bb2bc6",
+    "build/formal/cell_279.ys": "86f7ef89e97246999b79cc6ca56450e1b67f11e3793fbbc0edb890ca84f07c28",
+    "build/formal/cell_279.gold.blif": "39423a77d0515e6bd82f19cbc44bbde28fef0f7df2aba300d9c342606c508a03",
+    "build/formal/cell_279.gate.blif": "0dc52eb9dcc04680b6380064a22e5c0f5f0c4976f86affdf8aba8f36c07cc979",
+    "build/formal/cell_279.synth.v": "cf2312ce07381b0739a65c35f6cd246d3498d605cda8d7732971f4e8d8c2c382"
+  }
+}

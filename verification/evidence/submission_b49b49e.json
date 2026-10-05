@@ -1,0 +1,79 @@
+{
+  "status": "technical_checks_passed_user_payment_decision_pending",
+  "checked_at": "2026-10-05T19:17:00.133096+00:00",
+  "verified_commit": "b49b49e4f0abd0521220d4f39227774d748c9d79",
+  "info_yaml": {
+    "project": {
+      "title": "Auditable NAND hard logic and ternary dot product",
+      "author": "JogJohgoeg / TapeOut contributors",
+      "discord": "",
+      "description": "Circuit 279 and DOT32_T from pinned NAND netlists, with a serial interface",
+      "language": "Verilog",
+      "clock_hz": 10000000,
+      "tiles": "2x2",
+      "top_module": "tt_um_jogjohgoeg_hardwired",
+      "source_files": [
+        "project.v",
+        "cell_279.v",
+        "dot32_t.v"
+      ]
+    },
+    "pinout": {
+      "ui[0]": "DIN (MSB first)",
+      "ui[1]": "CS_n (0 = selected)",
+      "ui[2]": "SHIFT",
+      "ui[3]": "CORE (0 = circuit 279, 1 = DOT32_T)",
+      "ui[4]": "RUN",
+      "ui[5]": "",
+      "ui[6]": "",
+      "ui[7]": "",
+      "uo[0]": "DOUT (sample before SHIFT edge)",
+      "uo[1]": "RESPONSE (unread bits remain)",
+      "uo[2]": "CORE echo (live)",
+      "uo[3]": "",
+      "uo[4]": "",
+      "uo[5]": "",
+      "uo[6]": "",
+      "uo[7]": "",
+      "uio[0]": "",
+      "uio[1]": "",
+      "uio[2]": "",
+      "uio[3]": "",
+      "uio[4]": "",
+      "uio[5]": "",
+      "uio[6]": "",
+      "uio[7]": ""
+    },
+    "yaml_version": 6
+  },
+  "config": {
+    "CLOCK_PERIOD": 100,
+    "CLOCK_PORT": "clk",
+    "PL_TARGET_DENSITY_PCT": 60
+  },
+  "source_files": {
+    "info.yaml": "e42b284a6ba5437fc165b698e9135c0492c57594b8db2daebaa081ffc0d6de3c",
+    "src/project.v": "27e8879437c6e7cd2bbde5327d12afa3e59b7d2f261a46e87374fbaff27c6594",
+    "src/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
+    "src/dot32_t.v": "26cd443f456137861bd923d3766d2432231147dc1f8292275bd547716d1c5f59",
+    "src/config.json": "5fb65a7f951e1e07ab94d539d616a1a0f0f078d31b995cf6079693722af98e21"
+  },
+  "runs": {
+    "formal": 37359551360,
+    "gds": 37359561071,
+    "test": 37359423132,
+    "docs": 37359423101
+  },
+  "gds_sha256": "2a3dd3d5d08d914815cfe7541c256b74315c2f4e143c93d63ec99b104e634aff",
+  "four_tile_budget_eur": {
+    "tiles_only": 280,
+    "standard_kit_with_listed_shipping": 595,
+    "subsidized_kit_with_listed_shipping_if_eligible": 395
+  },
+  "additional_vs_two_tiles_eur": 140,
+  "shuttle": "TTSKY26d",
+  "closes": "2026-11-30",
+  "estimated_shipping": "2027-06-09",
+  "approval": "awaiting user; no order/project/revision submitted",
+  "configuration_changed_in_this_update": false
+}
