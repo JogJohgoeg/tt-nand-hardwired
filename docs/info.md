@@ -12,7 +12,7 @@ DOT32_T takes 32 signed 8-bit activations and 32 two-bit weight codes. For lane 
 
 Circuit #279 was checked against the published BSC CPU 732 netlist and canonical `eval`/`step` calls. The user published DOT32_T as **#3@2.245** on X Layer. Independent verification matched its raw bytes and all 86 canonical eval/step pairs at block 72440910; see `verification/evidence/xlayer_dot32_cid3.json`. See `verification/evidence/chain.json` for the exact block and source bytes.
 
-The initial layout configuration requests **1x2 tiles** with a **100 ns / 10 MHz clock target**. Area, timing, GDS, precheck and gate-level results must be established by GitHub Actions. These settings are not measured silicon specifications.
+The current layout candidate requests **2x2 tiles** with a **100 ns / 10 MHz clock target**. The first 1x2 run failed global placement at 107.137% utilization. The larger candidate still needs GDS, precheck, gate-level and timing results from GitHub Actions. These settings are not measured silicon specifications; see the report for the additional tile cost.
 
 ## How to test
 
@@ -41,7 +41,7 @@ CS_n=1 or ena=0 pauses all registers. With both RUN and SHIFT high, RUN wins. RU
 
 Example: DOT32_T with only lane 0 activation `-128` (byte `0x80`) and code `10` has packed input `(2 << 256) | 128` and output `0x00000080` (+128). Shift all 320 bits of that integer, bit 319 first. A transaction needs 353 clock edges: 320 load, one RUN, 32 read. At the 10 MHz target this is 35.3 microseconds without idle cycles; it is a protocol calculation, not measured throughput.
 
-`test/test.py` checks the ports against the independent Python golden model, including all 49 #279 chain samples, DOT L1/boundary/random samples, pause, reset and priority. The same test runs in the official gate-level workflow. `verification/test_cores.py` separately checks all 32,768 #279 inputs and 4,112 DOT inputs. The local full-wrapper Verilator regression covered all 36,880 transactions; receipts are included. `formal` proves equivalence to generic Yosys/ABC synthesis and includes a reset base case and a deliberately failing counterexample. Its result is pending the first authorized push.
+`test/test.py` checks the ports against the independent Python golden model, including all 49 #279 chain samples, DOT L1/boundary/random samples, pause, reset and priority. The same test runs in the official gate-level workflow. `verification/test_cores.py` separately checks all 32,768 #279 inputs and 4,112 DOT inputs. The local full-wrapper Verilator regression covered all 36,880 transactions; receipts are included. Initial Actions passed these source tests. The revised `formal` jobs compare generic Yosys/ABC synthesis at all ports and wrapper state bits, with a reset base case and an actual-output negative control. The first run proved cell_279 but timed out on DOT; the replacement proof awaits Actions.
 
 ## External hardware
 
@@ -51,4 +51,4 @@ A Tiny Tapeout demo board and a host that can drive synchronous GPIO are suffici
 
 本项目把 #279 的 21 条 NAND 记录和 DOT32_T 的 3,829 条 NAND 记录机械转换为门级 RTL。DOT 是三值点积单元，激活与权重均从引脚输入；首片尚未包含完整语言模型或固化模型权重。#279 已对 BSC 链上电路逐位抽查；DOT 已由用户在 X Layer 发布为 #3@2.245，独立 86 组 eval/step 逐位通过，原始网表哈希一致。
 
-串口按高位先行：空闲时装入 15/320 位，RUN 一拍，随后在 SHIFT 上升沿之前读取 2/32 位。低有效同步复位优先级最高；CS_n 高或 ena 低保持寄存器；RUN 优先于 SHIFT，可覆盖未读响应。`uo[1]` 表示仍有输出位未读，`uo[2]` 始终回显当前 CORE 输入。2 tile 与 10 MHz 都是待 GitHub Actions 验证的目标。未做付费提交。
+串口按高位先行：空闲时装入 15/320 位，RUN 一拍，随后在 SHIFT 上升沿之前读取 2/32 位。低有效同步复位优先级最高；CS_n 高或 ena 低保持寄存器；RUN 优先于 SHIFT，可覆盖未读响应。`uo[1]` 表示仍有输出位未读，`uo[2]` 始终回显当前 CORE 输入。首轮 test/docs 已通过；2 tile 布局失败，当前候选改为 4 tile，增加 €140，10 MHz 仍为待验证目标。未做付费提交。

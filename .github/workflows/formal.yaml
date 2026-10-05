@@ -5,7 +5,11 @@ permissions:
 jobs:
   equivalence:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        module: [cell_279, dot32_t, tt_um_jogjohgoeg_hardwired]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -15,11 +19,13 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y yosys
       - name: Check generated NAND netlists
         run: python verification/gen_verilog.py --check
+      - name: Check proof verdict handling
+        run: python -m unittest discover -s verification -p test_formal.py
       - name: Prove synthesis equivalence and reject a negative control
-        run: python verification/formal.py
+        run: python verification/formal.py --module ${{ matrix.module }}
       - name: Preserve proofs and synthesized netlists
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: formal-evidence
+          name: formal-evidence-${{ matrix.module }}
           path: build/formal/

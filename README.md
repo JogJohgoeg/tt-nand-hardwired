@@ -2,7 +2,7 @@
 
 A SKY130 Tiny Tapeout candidate containing circuit #279 (21 NANDs) and DOT32_T (3,829 NANDs), generated mechanically from pinned TapeOut gate records. DOT weights are runtime inputs; this is a first arithmetic demonstrator, not a complete hardwired LLM.
 
-The [datasheet](docs/info.md) specifies the serial protocol. [Verification evidence](verification/evidence/) records the local tests and both cores’ canonical chain checks. The [report](REPORT.md) distinguishes measured results from pending synthesis, physical and chain work.
+The [datasheet](docs/info.md) specifies the serial protocol. [Verification evidence](verification/evidence/) records local tests and both cores’ canonical chain checks. Initial Actions passed test/docs, but 1x2 placement exceeded capacity and DOT formal timed out. The [report](REPORT.md) explains the revised **2x2 candidate (+€140 tile fees)** and the pending rerun.
 
 ```sh
 python verification/gen_verilog.py --check
@@ -13,7 +13,7 @@ make
 python -m cocotb_tools.check_results results.xml
 ```
 
-These commands run Python and small gate simulations only. Yosys/ABC synthesis and formal checks run in [GitHub Actions](.github/workflows/formal.yaml). The official `ttsky26d` actions produce GDS, precheck and gate-level simulation. A local metadata-only preview is `python verification/formal.py --prepare`. No local synthesis is required.
+These commands run Python and small gate simulations only. Yosys/ABC synthesis and formal checks run in [GitHub Actions](.github/workflows/formal.yaml); the [proof method](verification/FORMAL.md) covers all ports, wrapper state transitions and reset. The official `ttsky26d` actions produce GDS, precheck and gate-level simulation. A local metadata-only preview is `python verification/formal.py --prepare`. No local synthesis is required.
 
 Generated cores must be changed by changing the source records and regenerating them. All new code is MIT ([LICENSE-MIT](LICENSE-MIT)); the inherited Tiny Tapeout template remains Apache-2.0 ([LICENSE](LICENSE)). The protocol specification is CC0-1.0 ([LICENSE-SPEC](LICENSE-SPEC)).
 

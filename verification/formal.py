@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Prepare or run source-to-Yosys/ABC synthesis equivalence on GitHub Actions.
+"""ABC port CEC and complete wrapper state-transition equivalence, Actions only.
 
---prepare is metadata-only. Actual Yosys execution is restricted to a Linux
-GitHub runner. This is generic synthesis equivalence, not physical-netlist CEC.
+--prepare writes scripts without running EDA. This proves generic synthesis,
+not the routed SKY130 netlist. See verification/FORMAL.md for the proof boundary.
 """
 import argparse
 import hashlib
@@ -11,71 +11,161 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
+import shutil
 import subprocess
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
-BUILD = ROOT/'build/formal'
+BUILD = ROOT / 'build/formal'
 TOP = 'tt_um_jogjohgoeg_hardwired'
+MODULES = ('cell_279', 'dot32_t', TOP)
+STATE = {'in_sr': 320, 'out_sr': 32, 'out_count': 6}
 
 
 def script(top):
     files = f'src/{top}.v' if top != TOP else 'src/project.v src/cell_279.v src/dot32_t.v'
     out = f'build/formal/{top}'
-    # Save source after process lowering; synth applies ABC to the other copy.
-    steps = [f'read_verilog {files}', f'hierarchy -check -top {top}', 'proc', 'flatten',
-             'opt_clean', 'check -assert', f'write_rtlil {out}.source.il',
-             f'design -save source', f'synth -top {top} -flatten', 'check -assert',
-             f'write_verilog -noattr {out}.synth.v', f'design -save synthesized',
-             'design -reset', f'design -copy-from source -as gold {top}',
-             f'design -copy-from synthesized -as gate {top}',
-             'equiv_make gold gate equiv', 'hierarchy -top equiv', 'equiv_simple']
+    steps = [f'read_verilog {files}', f'hierarchy -check -top {top}',
+             'proc', 'flatten', 'opt_clean', 'check -assert', 'design -save source']
+    for side in ('gold', 'gate'):
+        steps += ['design -load source']
+        if side == 'gold':
+            # Lower RTL operators to gates without invoking ABC on the source.
+            steps += ['techmap', 'opt -fast']
+        else:
+            steps += [f'synth -top {top} -flatten', 'check -assert',
+                      f'write_verilog -noattr {out}.synth.v']
+        steps += ['dffunmap', 'opt_clean', 'check -assert',
+                  f'write_json {out}.{side}.state.json']
+        if top == TOP:
+            # Only the three named registers become state boundaries. Hide other
+            # internal aliases so expose cannot make extra unconstrained inputs.
+            steps += ['select -set state w:in_sr w:out_sr w:out_count',
+                      'rename -hide w:* @state %d', 'select *',
+                      'expose -dff -evert-dff', 'opt_clean', 'check -assert']
+        steps += [f'write_json {out}.{side}.json', f'write_blif {out}.{side}.blif']
+        if top == TOP:
+            # One active reset edge establishes identical zero state even when
+            # the two implementations start from unrelated arbitrary states.
+            steps += ['sat -verify -set-def-inputs -set rst_n 0 '
+                      '-prove in_sr.d 0 -prove out_sr.d 0 -prove out_count.d 0 '
+                      '-timeout 60']
+    return '\n'.join(steps) + '\n'
+
+
+def expected_ports(top):
+    if top != TOP:
+        ni, no = (15, 2) if top == 'cell_279' else (320, 32)
+        return {'din': ('input', ni), 'dout': ('output', no)}
+    ports = {name: ('input', 8) for name in ('ui_in', 'uio_in')}
+    ports.update({name: ('input', 1) for name in ('clk', 'ena', 'rst_n')})
+    ports.update({name: ('output', 8) for name in ('uo_out', 'uio_out', 'uio_oe')})
+    for name, width in STATE.items():
+        ports.update({name+'.q': ('input', width), name+'.d': ('output', width),
+                      name+'.c': ('output', 1)})
+    return ports
+
+
+def validate_model(top, side):
+    prefix = BUILD / f'{top}.{side}'
+    before = json.loads(Path(str(prefix)+'.state.json').read_text())['modules'][top]
+    flops = [c for c in before['cells'].values() if c['type'] == '$_DFF_P_']
     if top == TOP:
-        steps.append('equiv_induct -seq 4')
-    steps += ['equiv_status -assert']
-    if top == TOP:
-        # Induction alone assumes synchronized state. Prove reset establishes it.
-        steps += ['design -reset', f'design -copy-from source -as gold {top}',
-                  f'design -copy-from synthesized -as gate {top}',
-                  'miter -equiv -flatten gold gate reset_miter',
-                  'hierarchy -top reset_miter', 'opt_clean',
-                  'sat -verify -seq 2 -set-def-inputs -set-at 1 in_rst_n 0 '
-                  '-prove trigger 0 -prove-skip 1 -timeout 120 -show-inputs -show-outputs']
-    return '\n'.join(steps)+'\n'
+        state_bits = [b for name in STATE for b in before['netnames'][name]['bits']]
+        assert len(flops) == len(state_bits) == len(set(state_bits)) == 358
+        assert {c['connections']['Q'][0] for c in flops} == set(state_bits)
+        assert all(c['connections']['C'] == before['ports']['clk']['bits'] for c in flops)
+    else:
+        assert not flops, 'combinational core unexpectedly has state'
+    after = json.loads(Path(str(prefix)+'.json').read_text())['modules'][top]
+    ports = {n: (p['direction'], len(p['bits'])) for n, p in after['ports'].items()}
+    assert ports == expected_ports(top), f'unexpected proof interface: {ports}'
+    blif = Path(str(prefix)+'.blif').read_text()
+    # No latches, black boxes, EXDC, or unspecified values may be silently cut.
+    allowed = {'.model', '.inputs', '.outputs', '.names', '.end'}
+    assert all(line.split()[0] in allowed for line in blif.splitlines() if line.startswith('.'))
+    assert all('$undef' not in line for line in blif.splitlines()
+               if line.strip() != '.names $undef'), 'undefined signal in proof model'
+    return {'state_bits': len(flops), 'inputs': sum(w for d, w in ports.values() if d == 'input'),
+            'outputs': sum(w for d, w in ports.values() if d == 'output')}
+
+
+def invert_output(blif, output):
+    """Flip one actual result/state bit, preserving the entire proof interface."""
+    lines = blif.splitlines()
+    assert any(output in line.split()[1:] for line in lines if line.startswith('.outputs '))
+    assert '__negative_value' not in blif
+    result = []
+    for line in lines:
+        if line == '.end':
+            result += [f'.names __negative_value {output}', '0 1']
+        if not line.startswith(('.outputs ', '#')):
+            line = ' '.join('__negative_value' if token == output else token for token in line.split())
+        result.append(line)
+    return '\n'.join(result) + '\n'
+
+
+def cec_result(returncode, output):
+    if returncode != 0 or re.search(r'(?i)error:|undecided|timed out|miter computation has failed', output):
+        return 'error'
+    different = bool(re.search(r'(?m)^Networks are NOT EQUIVALENT(?:[. ]|$)', output))
+    equivalent = bool(re.search(r'(?m)^Networks are equivalent(?:[. ]|$)', output))
+    return ('equivalent' if equivalent else 'different') if equivalent != different else 'error'
+
+
+def cec(abc, gold, gate, log):
+    start = time.monotonic()
+    command = [abc, '-c', f'cec -T 120 {gold.relative_to(ROOT)} {gate.relative_to(ROOT)}']
+    with log.open('w') as stream:
+        # ABC cec returns 0 even for a counterexample: its verdict is mandatory.
+        result = subprocess.run(command, cwd=ROOT, stdout=stream, stderr=subprocess.STDOUT, timeout=150)
+    output = log.read_text()
+    print(output, flush=True)
+    verdict = cec_result(result.returncode, output)
+    return {'verdict': verdict, 'seconds': round(time.monotonic()-start, 3)}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--prepare',action='store_true')
+    parser.add_argument('--prepare', action='store_true')
+    parser.add_argument('--module', choices=MODULES)
     args = parser.parse_args()
-    BUILD.mkdir(parents=True,exist_ok=True)
-    modules = ['cell_279','dot32_t',TOP]
+    BUILD.mkdir(parents=True, exist_ok=True)
+    modules = [args.module] if args.module else MODULES
     for top in modules:
         (BUILD/f'{top}.ys').write_text(script(top))
     if args.prepare:
-        print('Prepared Yosys scripts only; no synthesis or SAT was run')
+        print('Prepared Yosys scripts only; no synthesis, ABC or SAT was run')
         return
-    if platform.system()!='Linux' or os.environ.get('GITHUB_ACTIONS')!='true':
+    if platform.system() != 'Linux' or os.environ.get('GITHUB_ACTIONS') != 'true':
         raise SystemExit('Run synthesis/formal only in GitHub Actions; use --prepare locally')
-    results = {}
+    abc = shutil.which('yosys-abc') or shutil.which('berkeley-abc')
+    assert abc, 'ABC executable missing'
     for top in modules:
-        subprocess.run(['yosys','-Q','-T','-l',str(BUILD/f'{top}.log'),'-s',str(BUILD/f'{top}.ys')],
-                       cwd=ROOT,check=True,timeout=900)
-        results[top] = 'proved'
-    # A deliberately wrong circuit must be rejected by the same formal engine.
-    (BUILD/'negative.v').write_text('module gold(input a, output y); assign y=a; endmodule\n'
-                                  'module gate(input a, output y); assign y=~a; endmodule\n')
-    neg = subprocess.run(['yosys','-Q','-T','-p',
-        'read_verilog build/formal/negative.v; equiv_make gold gate equiv; hierarchy -top equiv; '
-        'equiv_simple; equiv_status -assert'],cwd=ROOT,capture_output=True,text=True,timeout=60)
-    (BUILD/'negative.log').write_text(neg.stdout+neg.stderr)
-    assert neg.returncode!=0 and 'unproven' in (neg.stdout+neg.stderr).lower(), 'negative control was not rejected'
-    receipt = {'scope':'source RTL vs generic Yosys/ABC synthesized netlist, plus wrapper reset base case',
-               'results':results,'negative_control':'rejected',
-               'yosys':subprocess.check_output(['yosys','-V'],text=True).strip(),
-               'files':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
-                        for p in [*sorted((ROOT/'src').glob('*.v')),Path(__file__).resolve()]}}
-    (BUILD/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+        receipt_path = BUILD/f'{top}.receipt.json'
+        receipt_path.unlink(missing_ok=True)
+        subprocess.run(['yosys', '-Q', '-T', '-l', str(BUILD/f'{top}.log'),
+                        '-s', str(BUILD/f'{top}.ys')], cwd=ROOT, check=True, timeout=300)
+        models = {side: validate_model(top, side) for side in ('gold', 'gate')}
+        gold, gate = (BUILD/f'{top}.{side}.blif' for side in ('gold', 'gate'))
+        proof = cec(abc, gold, gate, BUILD/f'{top}.cec.log')
+        assert proof['verdict'] == 'equivalent', proof
+        negative = BUILD/f'{top}.negative.blif'
+        bit = 'in_sr.d[0]' if top == TOP else 'dout[0]'
+        negative.write_text(invert_output(gate.read_text(), bit))
+        reject = cec(abc, gold, negative, BUILD/f'{top}.negative.log')
+        assert reject['verdict'] == 'different', 'actual-output negative control was not rejected'
+        receipt = {'scope': 'source vs generic Yosys/ABC synthesis; all ports and all next-state bits',
+                   'module': top, 'models': models, 'proof': proof, 'negative_control': reject,
+                   'reset_base_case': 'both sides proved zero after one reset edge' if top == TOP else None,
+                   'yosys': subprocess.check_output(['yosys', '-V'], text=True).strip(),
+                   'abc_executable': abc,
+                   'files': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                             for p in [*sorted((ROOT/'src').glob('*.v')), Path(__file__).resolve(),
+                                       BUILD/f'{top}.ys', gold, gate, BUILD/f'{top}.synth.v']}}
+        receipt_path.write_text(json.dumps(receipt, indent=2)+'\n')
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     main()

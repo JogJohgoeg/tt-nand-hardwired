@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-05T15:11:03.120341+00:00",
+  "commit": "e50f2e107f9c63e7e1851af3dc44e37b4e5387fe",
+  "runs": {
+    "test": {
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37326566882",
+      "result": "success"
+    },
+    "docs": {
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37326566638",
+      "result": "success"
+    },
+    "formal": {
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37326566770",
+      "result": "failure"
+    },
+    "gds": {
+      "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37326566724",
+      "result": "failure"
+    }
+  },
+  "log_sha256": {
+    "formal_fail.log": "ad6913df7cfd41e14003276423c280f7c54edb2973a544e99e7fc981bf0b2236",
+    "gds_fail.log": "0e672b7ed0a8b678d42a38e2a67e96de209af2e3da4983090a35e6a9b8550a2c"
+  },
+  "physical": {
+    "tiles": "1x2",
+    "mapped_cells": 2863,
+    "sequential_cells": 358,
+    "mapped_area_um2": 31137.3632,
+    "sequential_area_um2": 7614.8032,
+    "core_area_um2": 34255.354,
+    "fixed_area_um2": 1178.63,
+    "pin_density_adjust_um2": 4299.99,
+    "adjusted_movable_area_um2": 35437.353,
+    "utilization_pct": 107.137,
+    "fatal": "GPL-0301",
+    "synthesis_strategy": "AREA_0",
+    "routed_timing": null
+  },
+  "formal": {
+    "cell_279": "proved",
+    "dot32_t": "unproven: subprocess timeout after 900 seconds",
+    "dot32_output_success_lines": 32,
+    "limit": "Output checks used intermediate equivalence cut points; remaining internal obligations prevent any whole-DOT proof claim. Wrapper did not run."
+  },
+  "candidate": {
+    "tiles": "2x2",
+    "tile_count": 4,
+    "clock_target_hz": 10000000,
+    "rtl_changed": false,
+    "status": "prepared; no replacement Actions result yet",
+    "official_def_url": "https://raw.githubusercontent.com/TinyTapeout/tt-support-tools/main/tech/sky130A/def/tt_block_2x2_pg.def",
+    "official_def_sha256": "524729b95e1a51b8e695c6353edc8966c472b14b457ccfe857fa20c0b5807807",
+    "die_bbox_um": [
+      0.0,
+      0.0,
+      334.88,
+      225.76
+    ],
+    "core_area_estimate_um2": 72564.5952,
+    "utilization_estimate_pct": 50.576,
+    "estimate_assumptions": "Same cell and pin-adjust areas, same margins, fixed area scales with core. CTS/routing/buffering/timing are not yet measured.",
+    "two_tile_reduction_to_60pct": 0.439969
+  },
+  "cost_eur": {
+    "basis": "pricing.json checked 2026-10-05; 70 EUR/tile",
+    "two_tiles": 140,
+    "four_tiles": 280,
+    "increment": 140,
+    "four_tiles_standard_kit_shipping": 595,
+    "four_tiles_individual_kit_shipping": 395,
+    "six_tiles": 420,
+    "six_tiles_increment_over_two": 280,
+    "limits": "Eligibility, inventory, taxes and checkout not confirmed; no purchase or paid submission."
+  }
+}
