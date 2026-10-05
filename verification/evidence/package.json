@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-10-05T15:13:40.911806+00:00",
-  "scope": "e50f2e1 test/docs passed; 2x2 candidate and replacement port/state CEC prepared locally; new formal/GDS/precheck/GL pending",
+  "checked_at": "2026-10-05T17:22:18.830542+00:00",
+  "scope": "bd1876b both core CEC + GDS/precheck/GL passed; wrapper definedness fix prepared locally; wrapper formal still pending",
   "checks": {
     "generated_rtl": "pass",
     "core_vectors": {
@@ -33,15 +33,37 @@
       "rtl_and_cocotb_source_hashes": "unchanged from e50f2e1",
       "formal_prepare_only": "pass; no EDA run",
       "tiles": "2x2 candidate; fee increment +140 EUR pending user decision"
+    },
+    "ci_bd1876b": {
+      "test": "pass",
+      "docs": "pass",
+      "core_CEC": "both pass with actual-output negative controls",
+      "wrapper": "reset base cases pass; export guard blocked CEC; definedness fix prepared",
+      "gds": "pass",
+      "precheck": "15/15 pass",
+      "gatelevel": "128 transactions pass",
+      "viewer": "optional Pages deployment 404; user decision"
+    },
+    "wrapper_fix_local": {
+      "AST": "pass",
+      "metadata_only_prepare": "pass",
+      "python_harness_tests": 2,
+      "EDA_calls": 0,
+      "new_definedness_controls": "prepared for Actions, not locally executed",
+      "X_control_iverilog_smoke": "4/4 input combinations; this is fixture simulation, not the SAT proof"
+    },
+    "gds_rerun_bd1876b": {
+      "run": 37334330241,
+      "gds": "pass",
+      "precheck": "pass",
+      "gl_test": "pass",
+      "viewer": "pass",
+      "metrics": "original run 37331447516 retained"
     }
   },
   "pending": [
-    "replacement GitHub formal jobs",
-    "2x2 GDS",
-    "precheck",
-    "routed gate simulation",
-    "routed timing",
-    "user decision on +140 EUR tile fee; paid submission"
+    "wrapper definedness + CEC in Actions",
+    "user decision on +140 EUR tiles and paid submission"
   ],
   "files": {
     ".github/workflows/docs.yaml": "74135725ac236ca64e1360d9c1b4012cec75a361e5b84104280b1bb74ff919a0",
@@ -52,9 +74,9 @@
     ".gitignore": "90ddc1fb92ca1513ca83b80236c6910fe768b20dad836561cb812c93a0022389",
     "LICENSE-MIT": "21eb7aa23cf8ff3a7b0dac6cbe781424fe10343efe29005b6e4863f28a9a7aa5",
     "LICENSE-SPEC": "e1e843ab128abd72ce3e69035abe0d34a4d0e2606784db3ceebabdfb3aa2a6ae",
-    "README.md": "39b2447706c1bc9b9ad2f8129d95eb89adb77344aae32b4f61fa0962e5e64f5a",
-    "REPORT.md": "8ae34536c998edfe21053c6ca5c0eae8491f58c1ac90b0ae57472f7054ad79fa",
-    "docs/info.md": "b010dbb8d33065c35f8961e1e9e03d1378841e7ff086dc42cfdb8999b88792a2",
+    "README.md": "d4d3850338917067d5ae5716ffa01a6e643d4dc4a05688b8a679acfe2eb723a2",
+    "REPORT.md": "b0b7f8d8dae9d7dfbe0993503a91093b285ab8375fc2de761f34bfa9dfcbe0f6",
+    "docs/info.md": "bd47102496f11e48e4a6e8d2ec5ce4a9e8ab5c165b609c0c1970607afe0080f1",
     "info.yaml": "e42b284a6ba5437fc165b698e9135c0492c57594b8db2daebaa081ffc0d6de3c",
     "src/cell_279.v": "0662794cc7e782e1efa94833ede750669a0c83c8f10c2ffc187d8427d45fb0f7",
     "src/config.json": "5fb65a7f951e1e07ab94d539d616a1a0f0f078d31b995cf6079693722af98e21",
@@ -64,7 +86,7 @@
     "test/requirements.txt": "c1ba8e1b931e68c3ff600bb849f20975435fedbb7e5f83932095a05d2dca1372",
     "test/tb.v": "18252573ee16975628d5c587c066b2aa7e9c367fe8b569e4f2adea0514a6d62f",
     "test/test.py": "0fd8c02a90e31917af8265afd6f8b04b5faa0a05c6ab252e1f35111a288773ce",
-    "verification/FORMAL.md": "b123399cf7ddc0ac40ceb546d526439d767cb1ffaa67d99ecbee052ef664b2b9",
+    "verification/FORMAL.md": "a995358e2fe5ad04aa4240007b91d5502b03a5e0b473a374bc252cb48194f9dc",
     "verification/burn/README.md": "1182ea23d0b4ee8b85bd34f38d25df34e39cc275bc761e98d28522dfb7ecd9a4",
     "verification/burn/dot32_t_xlayer.json": "c9242e26a6907c7091787c45cb89eedb85e1b16680b7e86917193df460ccd276",
     "verification/burn/verification.json": "22d96514ba5554cb40a967bb97c7c83886e7e7f96ec50ee9a0ea065a249077ba",
@@ -72,16 +94,30 @@
     "verification/chain_vectors/manifest.json": "54911c494110e8804c779a517bfaf36cf6f65ed007489f250bd39a541ab9de03",
     "verification/evidence/chain.json": "67175eef43bf7a8bb8652f7a2b349ae62e4a439038615d8a64fb2a6433608bd5",
     "verification/evidence/chain_inventory.json": "89431cdae3e492525cdf81f1c0e12701c610c3a005c9836a09964e5a7b7827ee",
+    "verification/evidence/ci_bd1876b.json": "febe459568591ebeebbd7e2525503abbd545009338f0660e72ad930183df4b12",
     "verification/evidence/ci_e50f2e1.json": "a25951755d55dfe9ba7cb14f592440f4cd45a564307202d5981d425de0b29564",
     "verification/evidence/cocotb-local.xml": "985dffb4f71ba29733a163f4977d9963c7e1e3d22389de9a51300ef93b067027",
     "verification/evidence/cores-local.json": "032250071ae5688376c75babac73bcb166f497b59aa07d13f511f844be7e9080",
+    "verification/evidence/formal_bd1876b/cell_279.cec.log": "a5acaf5ff98f9645d00462c99798e70ab3d1fab03de676d0c7d5e4e361bad709",
+    "verification/evidence/formal_bd1876b/cell_279.negative.log": "a838db5852ceefdb2fff171a9376868c3d362552faeb9fcbc1f6fbd9a4555247",
+    "verification/evidence/formal_bd1876b/cell_279.receipt.json": "3e82ef28e428d5b4bf06588dd75c24b278df3d92034c86b601c51294f69186d5",
+    "verification/evidence/formal_bd1876b/dot32_t.cec.log": "ecabcc9466cfbe79c57b1b6fd2d511d0aef849356fc5190ea9d8d1678953b759",
+    "verification/evidence/formal_bd1876b/dot32_t.negative.log": "ee88a333f328592e83a32aabca60c0c60e6585626d5ea063525009a18c078ad0",
+    "verification/evidence/formal_bd1876b/dot32_t.receipt.json": "1b0b5ecd143496aceca933945946413863987189627a2d7a39234997eead3fd7",
     "verification/evidence/local-files.json": "3090326c852adab3d51264475228022f32bcc7469cbf6a0c163aa1d8b2655c77",
+    "verification/evidence/physical_bd1876b/commit_id.json": "896eb59f6e8b1c6f2a422d21585edec1c6a7f58356c02d879ea3903a83a1763d",
+    "verification/evidence/physical_bd1876b/gatelevel-results.xml": "00f0eeaa2a2a80bffc6df55485176a3a575343d2709ee2cf5570b2f54b00e652",
+    "verification/evidence/physical_bd1876b/manifest.json": "cee0f46e345f8081db5ee598e4f383e023c3041bdace6a557e96959db47a3ff2",
+    "verification/evidence/physical_bd1876b/metrics.csv": "4343d9026fae84a094f3f2f251fc74d9712e7519c81b8229b26a8bd5912bd047",
+    "verification/evidence/physical_bd1876b/pdk.json": "3a4735418652e24f5dc21f2a0cb308d65d1a37f08a1218f27994f56811ff59f3",
+    "verification/evidence/physical_bd1876b/precheck-results.md": "8ab1c8bc31ac259f4b23800945c005507f2bfa5377d84d4f7b2465d9d1aa7f87",
+    "verification/evidence/physical_bd1876b/precheck-results.xml": "167b291e7c5d1f013a171a6217b1207a42332bb75196a407e6ac65c027f6a180",
     "verification/evidence/pricing.json": "c8f4855843483c6fe4957645752040a19ce042d5d3b701eb7d96d13b29063ecd",
     "verification/evidence/simulation.json": "1238648510b29f2ef84b0f51d04c66fa8d6d13d6290e95082ab104d98ea7e4ce",
     "verification/evidence/standalone_dot32_chain.json": "92b3f9ba5dbe81bf8a89e9cb46af38615ed4f6ee460bd5cda55e03b317582386",
     "verification/evidence/wrapper.json": "6869aec99e82750a0768d63d18dd874fff0c1047650aa0fdc506c4cf8d74ba0d",
     "verification/evidence/xlayer_dot32_cid3.json": "f74459b12482adae74d675370373c63b6a915865e029eea0028e5ba16dc215f5",
-    "verification/formal.py": "d25c13e4438393c56c8441143f9df3a3d8ccc950613a68470a49b3dd09207cec",
+    "verification/formal.py": "1571448aca3cfb2f4c97076cd5da1c69aaad33b29372e9fff49e0c66769d4563",
     "verification/gen_verilog.py": "06826c60629224a49c3b308daa2c947a52e0ab8715ce40d5464ff3c5f9184115",
     "verification/golden.py": "f0b00eef03b833896efdee9a683576542fb0edccee60b29350dfdd32d00d2d45",
     "verification/l1_vectors.json": "0e930e8e8c3e87d25f313d0adf40805d1b7fce867d758752d8ab49358ec0ff65",
@@ -95,6 +131,7 @@
     "verification/upstream/l1.py": "498d2958c64b1c5aaa8a031c91aaffd690d5f6644938cf0ea7290ecb767b3bc1",
     "verification/upstream/l2.py": "cfa50181cf5b4f4b15c214f4b19735758e44a5603600a6a8e5165c290aacbe41",
     "verification/verify_burn.py": "147d44db0e0fa6e784245162d6f3783cacd5717ab88ff90669389aa896361d57",
-    "verification/verify_chain.py": "5f6ec6f9893e67cf75d9609ca2e68f0eda61fc92d85871e0d418ba2ebb0d3189"
+    "verification/verify_chain.py": "5f6ec6f9893e67cf75d9609ca2e68f0eda61fc92d85871e0d418ba2ebb0d3189",
+    "verification/evidence/gds_rerun_bd1876b.json": "b5773d57ce196875e1566bb0e997fc5584185e9113c271be2690c4635c771608"
   }
 }

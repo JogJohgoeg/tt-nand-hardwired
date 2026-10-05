@@ -2,7 +2,7 @@
 
 A SKY130 Tiny Tapeout candidate containing circuit #279 (21 NANDs) and DOT32_T (3,829 NANDs), generated mechanically from pinned TapeOut gate records. DOT weights are runtime inputs; this is a first arithmetic demonstrator, not a complete hardwired LLM.
 
-The [datasheet](docs/info.md) specifies the serial protocol. [Verification evidence](verification/evidence/) records local tests and both cores’ canonical chain checks. Initial Actions passed test/docs, but 1x2 placement exceeded capacity and DOT formal timed out. The [report](REPORT.md) explains the revised **2x2 candidate (+€140 tile fees)** and the pending rerun.
+The [datasheet](docs/info.md) specifies the serial protocol. [Verification evidence](verification/evidence/) records local tests and both cores’ canonical chain checks. Actions **bd1876b** passed both core CEC jobs and **2x2 GDS, precheck and gate simulation**; wrapper formal remains pending. The [report](REPORT.md) includes measured area/timing, the internal-X proof fix and the **+€140 tile-fee** comparison.
 
 ```sh
 python verification/gen_verilog.py --check

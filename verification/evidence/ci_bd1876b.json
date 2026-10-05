@@ -1,0 +1,111 @@
+{
+  "checked_at": "2026-10-05T15:36:38.123148+00:00",
+  "commit": "bd1876b02eb69757a742ebc1e161cdfe8da11a84",
+  "formal_run": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37331447451",
+  "core_results": {
+    "cell_279": {
+      "proof": {
+        "verdict": "equivalent",
+        "seconds": 0.032
+      },
+      "negative_control": {
+        "verdict": "different",
+        "seconds": 0.032
+      }
+    },
+    "dot32_t": {
+      "proof": {
+        "verdict": "equivalent",
+        "seconds": 0.716
+      },
+      "negative_control": {
+        "verdict": "different",
+        "seconds": 0.064
+      }
+    }
+  },
+  "wrapper": {
+    "result": "failed before CEC: undefined signal in proof model",
+    "reset_base_cases": 2,
+    "reset_result": "SAT SUCCESS on both sides",
+    "state_bits": 358,
+    "gold_undef_muxes": 76,
+    "gate_undef_cells": 0,
+    "changed_code": "Prove all 385 outputs defined under arbitrary binary inputs/state before setundef -zero; strict BLIF guard retained; add masked/leaking X proof controls",
+    "replacement_result": "pending Actions"
+  },
+  "local_checks": {
+    "python_harness_tests": 2,
+    "python_AST": "pass",
+    "metadata_only_prepare": "pass",
+    "local_EDA_calls": 0,
+    "X_control_iverilog_smoke": {
+      "cases": 4,
+      "result": "masked outputs always defined; leaking output X exactly when s=1",
+      "source": "exact embedded fixture strings from verification/formal.py",
+      "log_sha256": "02679c9bb82cf95c7e696ed9d37dd2a8b8f25d4c4fafecb06a846dc3fd2bd2e6"
+    }
+  },
+  "physical_status_snapshot": {
+    "run": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37331447516",
+    "gds": "success",
+    "gl_test": "success",
+    "precheck": "success: 15/15",
+    "viewer": "Pages deployment 404; enable/disable is user decision, no setting changed"
+  },
+  "original_failure_log_sha256": "57c8d459d72f1112ecc1d4b0be4553570a7e920718c95e12c0295d64f1a95e2d",
+  "downloaded_artifact_sha256": {
+    "formal-evidence-cell_279/cell_279.cec.log": "a5acaf5ff98f9645d00462c99798e70ab3d1fab03de676d0c7d5e4e361bad709",
+    "formal-evidence-cell_279/cell_279.gate.blif": "0dc52eb9dcc04680b6380064a22e5c0f5f0c4976f86affdf8aba8f36c07cc979",
+    "formal-evidence-cell_279/cell_279.gate.json": "4c27d8fa5ec318bcd55455f6f7d6e303f96e02c86c1e146019b8d6740e6876a0",
+    "formal-evidence-cell_279/cell_279.gate.state.json": "4c27d8fa5ec318bcd55455f6f7d6e303f96e02c86c1e146019b8d6740e6876a0",
+    "formal-evidence-cell_279/cell_279.gold.blif": "39423a77d0515e6bd82f19cbc44bbde28fef0f7df2aba300d9c342606c508a03",
+    "formal-evidence-cell_279/cell_279.gold.json": "c722319a94b4a8b3cc5f78480c7f56068e5e2268f82cf73c2e6de05b4a30241b",
+    "formal-evidence-cell_279/cell_279.gold.state.json": "c722319a94b4a8b3cc5f78480c7f56068e5e2268f82cf73c2e6de05b4a30241b",
+    "formal-evidence-cell_279/cell_279.log": "d2e7acaa4f4fd54c73984ed5adc27e3b563393d5f05b63da4b78666fa259ed96",
+    "formal-evidence-cell_279/cell_279.negative.blif": "2883c42307c85adff21847f6cbac3b3738ca1fcfcc5548711c9a684ad5e527fd",
+    "formal-evidence-cell_279/cell_279.negative.log": "a838db5852ceefdb2fff171a9376868c3d362552faeb9fcbc1f6fbd9a4555247",
+    "formal-evidence-cell_279/cell_279.receipt.json": "3e82ef28e428d5b4bf06588dd75c24b278df3d92034c86b601c51294f69186d5",
+    "formal-evidence-cell_279/cell_279.synth.v": "cf2312ce07381b0739a65c35f6cd246d3498d605cda8d7732971f4e8d8c2c382",
+    "formal-evidence-cell_279/cell_279.ys": "86f7ef89e97246999b79cc6ca56450e1b67f11e3793fbbc0edb890ca84f07c28",
+    "formal-evidence-dot32_t/dot32_t.cec.log": "ecabcc9466cfbe79c57b1b6fd2d511d0aef849356fc5190ea9d8d1678953b759",
+    "formal-evidence-dot32_t/dot32_t.gate.blif": "879a357f9eb4f4ae459b7e16b3c24796b041db7bfedb5d48c7556a2c05dc8d36",
+    "formal-evidence-dot32_t/dot32_t.gate.json": "6cf307a57fb9775fc8ab81dec5bbea983790c557603d69c1b0d9b530dca39bd2",
+    "formal-evidence-dot32_t/dot32_t.gate.state.json": "6cf307a57fb9775fc8ab81dec5bbea983790c557603d69c1b0d9b530dca39bd2",
+    "formal-evidence-dot32_t/dot32_t.gold.blif": "658747b0fc0fdeb01cf5d7d76c223ddf19969fca2d313a86cfc568e4e8ff2625",
+    "formal-evidence-dot32_t/dot32_t.gold.json": "188b421dad8264b385f1a9cade3ef2d4dc72c5b6b3c33dc343d6069cb891c4bd",
+    "formal-evidence-dot32_t/dot32_t.gold.state.json": "188b421dad8264b385f1a9cade3ef2d4dc72c5b6b3c33dc343d6069cb891c4bd",
+    "formal-evidence-dot32_t/dot32_t.log": "7479961248df73103e5e4d114115d536a4525cac488896a9da0d7a1f34147bde",
+    "formal-evidence-dot32_t/dot32_t.negative.blif": "6096933545afd4dd04058620979f59068e3c776d3560faf30497a6aa3389b826",
+    "formal-evidence-dot32_t/dot32_t.negative.log": "ee88a333f328592e83a32aabca60c0c60e6585626d5ea063525009a18c078ad0",
+    "formal-evidence-dot32_t/dot32_t.receipt.json": "1b0b5ecd143496aceca933945946413863987189627a2d7a39234997eead3fd7",
+    "formal-evidence-dot32_t/dot32_t.synth.v": "a49e8d980d098279c44a62a9f016c7d3ca6c1c658191a6201395e1932cc28ae7",
+    "formal-evidence-dot32_t/dot32_t.ys": "e6ca795288c58bb0ec25210d938e68adc9758227dee92ec0db5f7c3a8f65d2db",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.gate.blif": "b5d41eb520f7c537e8265d3f521e60c104efdde1ebdc3faaf3f63ff44fc649a5",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.gate.json": "bdb85950e0f71e847fe00096251249409e67cda5fb1e2044b022c614eeae64a8",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.gate.state.json": "0b3ccbaacba29e35d2170a5639741997814fdf878950f6737cdcefee31bb953c",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.gold.blif": "c9695cd5ae02acbc2025cd29e7dab4134e884e30538e9cd57870059a5c1bbd08",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.gold.json": "b15fd11058ea274c4d12e99b418cbed4fde5764004e9b10c9937e5f978c31ef1",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.gold.state.json": "2f98a76b0e9c6e51ccc6525c19e2ddfdbf4c85cf758f26edd641c591de9080d6",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.log": "d3c3a94b6acefc3921893d1adf9bfa852a8859fa132f12593c47d57112f9c645",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.synth.v": "0ffc187960f2ab07a2e132c46ac597e4c88fa1a9089ab27c5f10ec7a6523e68f",
+    "formal-evidence-tt_um_jogjohgoeg_hardwired/tt_um_jogjohgoeg_hardwired.ys": "d1975f6330addbd7a1326341bd15846c1e7f6d95a8ca8af896da409e657bd3fa"
+  },
+  "physical_metrics": {
+    "design__instance__area__stdcell": 39784.4,
+    "design__core__area": 72564.6,
+    "design__die__area": 75602.5,
+    "design__instance__utilization": 0.548262,
+    "timing__setup__ws": 58.28377589969978,
+    "timing__hold__ws": 0.10779588637932835,
+    "timing__setup__tns": 0.0,
+    "timing__hold__tns": 0.0,
+    "route__drc_errors": 0.0,
+    "magic__drc_error__count": 0.0,
+    "design__lvs_error__count": 0.0,
+    "design__max_cap_violation__count": 0.0,
+    "design__max_slew_violation__count": 226.0
+  },
+  "gds_sha256": "b909b61df0b70735cd87b2cfea0dc683b41ac737d2250a1baa337a210030a1b0",
+  "physical_log_sha256": "dc041e94284dd93a910ad073dc4560c6d23ff293a1084e514bb835dd491d21f4"
+}

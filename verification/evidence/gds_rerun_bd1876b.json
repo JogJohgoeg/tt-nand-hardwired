@@ -1,0 +1,39 @@
+{
+  "observed_at": "2026-10-05T17:22:18.830542+00:00",
+  "run": 37334330241,
+  "head_sha": "bd1876b02eb69757a742ebc1e161cdfe8da11a84",
+  "url": "https://github.com/JogJohgoeg/tt-nand-hardwired/actions/runs/37334330241",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "gds",
+      "databaseId": 111845140638,
+      "conclusion": "success",
+      "startedAt": "2026-10-05T15:37:35Z",
+      "completedAt": "2026-10-05T15:43:17Z"
+    },
+    {
+      "name": "precheck",
+      "databaseId": 111847751680,
+      "conclusion": "success",
+      "startedAt": "2026-10-05T15:43:20Z",
+      "completedAt": "2026-10-05T15:46:29Z"
+    },
+    {
+      "name": "viewer",
+      "databaseId": 111847751792,
+      "conclusion": "success",
+      "startedAt": "2026-10-05T15:43:56Z",
+      "completedAt": "2026-10-05T15:44:08Z"
+    },
+    {
+      "name": "gl_test",
+      "databaseId": 111847751841,
+      "conclusion": "success",
+      "startedAt": "2026-10-05T15:43:20Z",
+      "completedAt": "2026-10-05T15:44:19Z"
+    }
+  ],
+  "limits": "Read-only workflow status receipt. Physical metrics in the report remain tied to run 37331447516 artifacts, not re-attributed to this rerun. No new wrapper formal result."
+}

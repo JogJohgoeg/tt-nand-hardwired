@@ -1,0 +1,6 @@
+ABC command line: "cec -T 120 build/formal/dot32_t.gold.blif build/formal/dot32_t.negative.blif".
+
+Networks are NOT EQUIVALENT.  Time =     0.00 sec
+Verification failed for at least 1 outputs:  dout[0]
+Output dout[0]: Value in Network1 = 0. Value in Network2 = 1.
+Input pattern:  din[270]=0 din[271]=0 din[64]=0 din[272]=0 din[273]=0 din[72]=0 din[274]=0 din[275]=0 din[80]=0 din[276]=0 din[277]=0 din[88]=0 din[278]=0 din[279]=0 din[96]=0 din[280]=0 din[281]=0 din[104]=0 din[282]=0 din[283]=0 din[112]=0 din[284]=0 din[285]=0 din[120]=0 din[286]=0 din[287]=0 din[128]=0 din[288]=0 din[289]=0 din[136]=0 din[290]=0 din[291]=0 din[144]=0 din[292]=0 din[293]=0 din[152]=0 din[294]=0 din[295]=0 din[160]=0 din[296]=0 din[297]=0 din[168]=0 din[298]=0 din[299]=0 din[176]=0 din[300]=0 din[301]=0 din[184]=0 din[302]=0 din[303]=0 din[192]=0 din[304]=0 din[305]=0 din[200]=0 din[306]=0 din[307]=0 din[208]=0 din[308]=0 din[309]=0 din[216]=0 din[310]=0 din[311]=0 din[224]=0 din[312]=0 din[313]=0 din[232]=0 din[314]=0 din[315]=0 din[240]=0 din[316]=0 din[317]=0 din[248]=0 din[318]=0 din[319]=0 din[0]=0 din[256]=0 din[257]=0 din[8]=0 din[258]=0 din[259]=0 din[16]=0 din[260]=0 din[261]=0 din[24]=0 din[262]=0 din[263]=0 din[32]=0 din[264]=0 din[265]=0 din[40]=0 din[266]=0 din[267]=0 din[48]=0 din[268]=0 din[269]=0 din[56]=0

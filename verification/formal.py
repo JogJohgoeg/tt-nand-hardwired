@@ -23,6 +23,13 @@ MODULES = ('cell_279', 'dot32_t', TOP)
 STATE = {'in_sr': 320, 'out_sr': 32, 'out_count': 6}
 
 
+def definedness_command(outputs):
+    # If ANY output can be X with binary inputs, the constraints have a model
+    # and the deliberately false property fails. UNSAT proves all outputs defined.
+    return ('sat -verify -enable_undef -set-def-inputs '
+            f"-set-any-undef {','.join(outputs)} -prove 1'b0 1'b1 -timeout 60")
+
+
 def script(top):
     files = f'src/{top}.v' if top != TOP else 'src/project.v src/cell_279.v src/dot32_t.v'
     out = f'build/formal/{top}'
@@ -44,13 +51,18 @@ def script(top):
             steps += ['select -set state w:in_sr w:out_sr w:out_count',
                       'rename -hide w:* @state %d', 'select *',
                       'expose -dff -evert-dff', 'opt_clean', 'check -assert']
-        steps += [f'write_json {out}.{side}.json', f'write_blif {out}.{side}.blif']
         if top == TOP:
+            # proc lowering may leave X on a mux branch masked by a later mux.
+            # Prove it cannot escape to ANY observable/next-state/clock output
+            # before choosing a binary representation for ABC's BLIF format.
+            outputs = [n for n, (d, _) in expected_ports(top).items() if d == 'output']
+            steps += [f'write_json {out}.{side}.undef.json', definedness_command(outputs)]
             # One active reset edge establishes identical zero state even when
             # the two implementations start from unrelated arbitrary states.
             steps += ['sat -verify -set-def-inputs -set rst_n 0 '
                       '-prove in_sr.d 0 -prove out_sr.d 0 -prove out_count.d 0 '
-                      '-timeout 60']
+                      '-timeout 60', 'setundef -zero', 'opt_clean', 'check -assert']
+        steps += [f'write_json {out}.{side}.json', f'write_blif {out}.{side}.blif']
     return '\n'.join(steps) + '\n'
 
 
@@ -126,6 +138,30 @@ def cec(abc, gold, gate, log):
     return {'verdict': verdict, 'seconds': round(time.monotonic()-start, 3)}
 
 
+def check_definedness_controls():
+    # One output is always defined. The other leaks X only in the negative:
+    # this also catches accidentally requiring ALL outputs to be undefined.
+    (BUILD/'undef_controls.v').write_text(
+        "module masked(input s, a, output good, bad);\n"
+        "wire branch = s ? 1'bx : a;\n"
+        "assign good = a; assign bad = s ? a : branch; endmodule\n"
+        "module leaking(input s, a, output good, bad);\n"
+        "assign good = a; assign bad = s ? 1'bx : a; endmodule\n")
+    for top in ('masked', 'leaking'):
+        ys = BUILD/f'undef_{top}.ys'
+        ys.write_text(f'read_verilog build/formal/undef_controls.v\nhierarchy -top {top}\n'
+                      'proc\ntechmap\nopt_clean\n'+definedness_command(['good', 'bad'])+'\n')
+        result = subprocess.run(['yosys', '-Q', '-T', '-s', str(ys)], cwd=ROOT,
+                                capture_output=True, text=True, timeout=75)
+        output = result.stdout + result.stderr
+        (BUILD/f'undef_{top}.log').write_text(output)
+        if top == 'masked':
+            assert result.returncode == 0 and 'no model found: SUCCESS!' in output
+        else:
+            assert result.returncode != 0 and 'model found: FAIL!' in output, output
+    return {'masked_X': 'proved defined', 'observable_X': 'rejected'}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--prepare', action='store_true')
@@ -145,6 +181,7 @@ def main():
     for top in modules:
         receipt_path = BUILD/f'{top}.receipt.json'
         receipt_path.unlink(missing_ok=True)
+        undef_controls = check_definedness_controls() if top == TOP else None
         subprocess.run(['yosys', '-Q', '-T', '-l', str(BUILD/f'{top}.log'),
                         '-s', str(BUILD/f'{top}.ys')], cwd=ROOT, check=True, timeout=300)
         models = {side: validate_model(top, side) for side in ('gold', 'gate')}
@@ -158,12 +195,16 @@ def main():
         assert reject['verdict'] == 'different', 'actual-output negative control was not rejected'
         receipt = {'scope': 'source vs generic Yosys/ABC synthesis; all ports and all next-state bits',
                    'module': top, 'models': models, 'proof': proof, 'negative_control': reject,
+                   'definedness': 'all 385 outputs defined on both sides before setundef -zero' if top == TOP else 'strict BLIF check',
+                   'definedness_controls': undef_controls,
                    'reset_base_case': 'both sides proved zero after one reset edge' if top == TOP else None,
                    'yosys': subprocess.check_output(['yosys', '-V'], text=True).strip(),
                    'abc_executable': abc,
                    'files': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                              for p in [*sorted((ROOT/'src').glob('*.v')), Path(__file__).resolve(),
-                                       BUILD/f'{top}.ys', gold, gate, BUILD/f'{top}.synth.v']}}
+                                       BUILD/f'{top}.ys', gold, gate, BUILD/f'{top}.synth.v',
+                                       *([BUILD/f'{top}.{s}.undef.json' for s in ('gold', 'gate')]
+                                         if top == TOP else [])]}}
         receipt_path.write_text(json.dumps(receipt, indent=2)+'\n')
 
 
